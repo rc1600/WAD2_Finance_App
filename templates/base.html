@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+
+<ul>
+    <li><a href="aboutUs.html">About us</a></li>
+    <li><a href="contactUs.html">Contact us</a></li>
+    <li><a href="login.html">login</a></li>
+  </ul>
+
+
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>
+            Finance Manager - 
+            {% block title_block %}
+                Managing your finances
+            {% endblock %}
+        </title>
+    </head>  
+    <body>
+        <div>
+            {% block body_block %}
+                This is body_block's deafult content.
+            {% endblock %}
+        </div>
+        <div>
+            {% block sidebar_block %}
+                {% get_category_list category %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
