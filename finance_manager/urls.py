@@ -23,6 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', views.signup_view, name ='signup'),
     path('login', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('logout', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('logout', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('', home_view, name='home'),  # Map the root URL to the home_view
 ]

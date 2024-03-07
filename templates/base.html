@@ -2,14 +2,6 @@
 {% load staticfiles %}
 
 <html>
-
-<ul>
-    <li><a href="aboutUs.html">About us</a></li>
-    <li><a href="contactUs.html">Contact us</a></li>
-    <li><a href="login.html">login</a></li>
-  </ul>
-
-
     <head lang="en">
         <meta charset="UTF-8" />
         <title>
@@ -22,13 +14,13 @@
     <body>
         <div>
             {% block body_block %}
-                This is body_block's deafult content.
+                This is body_block's default content.
             {% endblock %}
         </div>
         <div>
             {% block sidebar_block %}
-                {% get_category_list category %}
-            {% endblock %}
+                <!-- Any side bar content goes here -->
+            {% endblock %} 
         </div>
     </body>
 </html>

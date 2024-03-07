@@ -1,5 +1,5 @@
 {% extends 'base.html' %}  
-{% load staticfiles %}  
+{% load static %}  <!-- Updated from staticfiles to static for newer Django versions -->
 {% block title_block %}
     Home - Finance Manager
 {% endblock %}
@@ -9,10 +9,12 @@
         <h1>Welcome to the Finance Manager App</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'aboutUs' %}">About Us</a></li>  <!-- Update URLs as needed -->
-                <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Login</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
