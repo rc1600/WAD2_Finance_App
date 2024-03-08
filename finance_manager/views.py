@@ -28,3 +28,36 @@ def signup_view(request):
 
 def home_view(request):
     return render(request, 'home.html')
+
+def index(request):
+    return render(request, 'WAD2_FINANCE_APP/index.html')
+
+def signup(request):
+    return render(request, 'WAD2_FINANCE_APP/signUp.html')
+
+def login(request):
+    return render(request, 'WAD2_FINANCE_APP/login.html')
+
+def contact_us(request):
+    return render(request, 'WAD2_FINANCE_APP/contactUs.html')
+
+def about(request):
+    return render(request, 'WAD2_FINANCE_APP/aboutUs.html')
+
+def user_account(request):
+    return render(request, 'WAD2_FINANCE_APP/userAccountPage.html')
+
+def financial_account(request):
+    return render(request, 'WAD2_FINANCE_APP/financialAccount.html')
+
+def add_new_account(request):
+    return render(request, 'WAD2_FINANCE_APP/newAccount.html')
+
+def budget(request):
+    return render(request, 'WAD2_FINANCE_APP/budget.html')
+
+def income_expenditure(request):
+    return render(request, 'WAD2_FINANCE_APP/incomeOutcome.html')
+
+def analytics(request):
+    return render(request, 'WAD2_FINANCE_APP/analysis.html')

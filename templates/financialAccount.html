@@ -1,0 +1,13 @@
+{% extends 'WAD2_FINANCE_APP/base.html' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+    <h1>Index</h1>
+    <ul>
+        <li><a href="{% url 'WAD2_FINANCE_APP:newAccount' %}">Add New Account</a></li>
+        <li><a href="{% url 'WAD2_FINANCE_APP:budget' %}">Budget</a></li>
+        <li><a href="{% url 'WAD2_FINANCE_APP:incomeOutcome' %}">Income/Outcome</a></li>
+        <li><a href="{% url 'WAD2_FINANCE_APP:analysis %}">Analytics</a></li>
+    </ul>
+{% endblock %}
