@@ -24,8 +24,7 @@ urlpatterns = [
     path('signup/', views.signup_view, name ='signup'),
     path('login', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
-    path('', home_view, name='home'),  # Map the root URL to the home_view
-    path('', views.index, name='index'),  
+    path('', home_view, name='home'),  # Map the root URL to the home_view 
     path('signup/', views.signup, name='signup'), 
     path('login/', views.login, name='login'),  
     path('contact_us/', views.contact_us, name='contact_us'),  

@@ -29,9 +29,6 @@ def signup_view(request):
 def home_view(request):
     return render(request, 'home.html')
 
-def index(request):
-    return render(request, 'WAD2_FINANCE_APP/index.html')
-
 def signup(request):
     return render(request, 'WAD2_FINANCE_APP/signUp.html')
 
