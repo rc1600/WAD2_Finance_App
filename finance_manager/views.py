@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
 
 def signup_view(request):
     if request.method == 'POST':
@@ -30,31 +32,39 @@ def home_view(request):
     return render(request, 'home.html')
 
 def signup(request):
-    return render(request, 'WAD2_FINANCE_APP/signUp.html')
+    return render(request, 'signUp.html')
 
 def login(request):
-    return render(request, 'WAD2_FINANCE_APP/login.html')
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect(reverse('home'))
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
 def contact_us(request):
-    return render(request, 'WAD2_FINANCE_APP/contactUs.html')
+    return render(request, 'contactUs.html')
 
 def about(request):
-    return render(request, 'WAD2_FINANCE_APP/aboutUs.html')
+    return render(request, 'aboutUs.html')
 
 def user_account(request):
-    return render(request, 'WAD2_FINANCE_APP/userAccountPage.html')
+    return render(request, 'userAccountPage.html')
 
 def financial_account(request):
-    return render(request, 'WAD2_FINANCE_APP/financialAccount.html')
+    return render(request, 'financialAccount.html')
 
 def add_new_account(request):
-    return render(request, 'WAD2_FINANCE_APP/newAccount.html')
+    return render(request, 'newAccount.html')
 
 def budget(request):
-    return render(request, 'WAD2_FINANCE_APP/budget.html')
+    return render(request, 'budget.html')
 
 def income_expenditure(request):
-    return render(request, 'WAD2_FINANCE_APP/incomeOutcome.html')
+    return render(request, 'incomeOutcome.html')
 
 def analytics(request):
     return render(request, 'WAD2_FINANCE_APP/analysis.html')
