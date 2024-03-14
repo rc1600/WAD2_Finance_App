@@ -1,0 +1,111 @@
+/* Wireframe - 1 */
+/*
+box-sizing: border-box;
+
+position: relative;
+width: 1440px;
+height: 1024px;
+
+background: #BFBEBE;
+mix-blend-mode: exclusion;
+border: 1px solid #000000;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 20px;
+
+
+/* unsplash:hTtK6tvTRY0 */ /*
+
+position: absolute;
+width: 460px;
+height: 280px;
+
+background: url(.jpg);
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+border-radius: 20px;
+
+
+/* unsplash:ukz5WeYjdvE */ /*
+
+box-sizing: border-box;
+
+position: absolute;
+width: 460px;
+height: 278px;
+
+background: url(.jpg);
+border: 1px solid #000000;
+filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+border-radius: 20px;
+*/
+
+body {
+    background-color: #454646;
+}
+
+button {
+    background-color: #b892d8;
+    border-radius: 10px;
+}
+
+nav {
+    float: right;
+}
+
+.nav_elements {
+    display: inline-block;
+}
+
+nav a {
+    color: #FFFF;
+    text-decoration: none;
+    padding: 5px;
+}
+
+
+
+h2 {
+
+width: 193px;
+height: 32px;
+left: 96px;
+top: 41px;
+
+font-family: 'Newsreader';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+/* identical to box height, or 32px */
+letter-spacing: -0.01em;
+
+color: #b892d8;
+
+display: inline-block;
+
+
+}
+
+h4 {
+    /* The first money management system that gives you control */
+
+position: absolute;
+width: 840px;
+height: 123px;
+left: 300px;
+top: 144px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 130%;
+/* or 42px */
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}
+
+i {
+    padding:6px;
+}

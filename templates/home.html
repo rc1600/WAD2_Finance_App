@@ -4,30 +4,31 @@
     Home - Finance Manager
 {% endblock %}
 
+{% block log_in %}
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}">Logout</a>
+{%else%}
+<a href="{% url 'login' %}">Log in</a>
+{% endif %}
+{% endblock%}
+
+
 {% block body_block %}
-    <header>
-        <h1>Welcome to the Finance Manager App</h1>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                    <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
-                    <li><a href="{% url 'aboutUs' %}">About</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
     <main>
         <section>
-            <h2>Manage Your Finances</h2>
-            <p>Keep track of your income, expenses, and budget all in one place. Test Branch </p>
+            <h4>The <h4><i> first </i></h4> money management system that gives <i> you </i> control</h4>
+            <button>Sign Up</button>
+        </section>
+        <hr>
+        <section>
+            <img src="" alt="img1">
+            <img src="" alt="img2">
+        </section>
+        <section>
+            <p>
+                Intro text
+            </p>
         </section>
     </main>
 {% endblock %}
 
-{% block sidebar_block %}
-    Custom sidebar content for home page.
-{% endblock %}

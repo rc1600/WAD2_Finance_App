@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-{% load staticfiles %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
 
 <html>
     <head lang="en">
         <meta charset="UTF-8" />
-        <title>
-            Finance Manager - 
+        <title> 
             {% block title_block %}
-                Managing your finances
             {% endblock %}
         </title>
     </head>  
     <body>
+        <header>
+        <h2>Finance Manager</h2>
+        <nav>
+            <ul>
+                <li class = "nav_elements"><a href="{% url 'about' %}">who we are</a></li>
+                <li class = "nav_elements"><a href="{% url 'contact_us' %}">contact us</a></li>
+                <li class = "nav_elements"><button>{% block log_in %} {% endblock %}</button></li>
+            </ul>
+        </nav>
+        </header>
+        <hr>
         <div>
             {% block body_block %}
                 This is body_block's default content.
@@ -22,5 +32,16 @@
                 <!-- Any side bar content goes here -->
             {% endblock %} 
         </div>
+
+
+        <footer>
+            <nav>
+                <ul>
+                    <!--
+                    <li><a href="Instagram"><img src="Instagram" alt=""></a></li>
+                    <li><a href="Facebook"><img src="Facebook" alt=""></a></li> -->
+                </ul>
+            </nav>
+        </footer>
     </body>
 </html>
