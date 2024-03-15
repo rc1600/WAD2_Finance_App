@@ -12,7 +12,7 @@ class FinancialAccountAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('username','financial_account_name',)}
 
 class BudgetAdmin(admin.ModelAdmin):
-    list_display = ('date', 'financial_account', 'category', 'price')
+    list_display = ('date', 'financial_account', 'category', 'amount')
 
 class IncomeAdmin(admin.ModelAdmin):
     list_display = ('date', 'financial_account', 'source', 'amount')

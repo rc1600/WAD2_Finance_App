@@ -16,6 +16,10 @@ staticfiles/
 *.sqlite3
 *.db
 
+# Migrations
+migrations/__pycache__/
+*_initial.py
+
 # IDE specific files
 .vscode/
 .idea/
