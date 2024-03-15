@@ -46,6 +46,10 @@ section {
     
 }
 
+hr {
+    width: 1200px;
+}
+
 button {
     background-color: #b892d8;
     border-radius: 10px; 
@@ -57,7 +61,13 @@ button {
 
 /* Log in */
 
+.login {
+    width: 800px;
+}
 
+.login p:nth-child(-n+2) {
+    display: inline; /* Display as inline-block */
+}
 
 nav {
     float: right;

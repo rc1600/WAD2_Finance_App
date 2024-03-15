@@ -6,6 +6,8 @@ from .models import UserProfile, Income, Expense, FinancialAccount, Budget
 
 class CustomUserCreationForm(UserCreationForm):  
     email = forms.EmailField(required=True, label='Email')
+    username = forms.CharField(required=True, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}))
+    password1 = forms.CharField(required=True, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Password'}))
 
     class Meta:
         model = User

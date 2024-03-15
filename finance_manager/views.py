@@ -16,7 +16,7 @@ def signup_view(request):
                                 password=form.cleaned_data['password1'])
             if user is not None and user.is_active:
                 login(request, user)  # Log the user in
-                return redirect(reverse('home'))  # Redirect to home page
+                return redirect(reverse('userAccountPage'))  # Redirect to home page
             else:
                 # User might not be active, or authentication backend is not returning the user
                 messages.error(request, "Account created successfully, please verify your email before login.")

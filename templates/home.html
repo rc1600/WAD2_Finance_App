@@ -15,20 +15,14 @@
 
 {% block body_block %}
     <header>
-        <h1>Welcome to the Finance Manager App</h1>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Logout</a></li>
-                    <li><a href="{% url 'password_change' %}">Change Password</a></li>
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
-                    
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                {% endif %}
+                {%endif%}
             </ul>
         </nav>
     </header>
@@ -50,6 +44,3 @@
     </main>
 {% endblock %}
 
-{% block sidebar_block %}
-    Custom sidebar content for home page.
-{% endblock %}

@@ -2,12 +2,16 @@
 
 {% block body_block %}
 
+<section class = "center">
 <h2>Sign Up</h2>
-<form method="post">
+<form method="post" class = "login">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+    {{ form.username }}
+    {{ form.email}}
+    {{form.password}}
+    <button type="submit" class = "center">Sign Up</button>
 </form>
+</section>
 
 {% if messages %}
   <ul>
