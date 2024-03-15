@@ -15,18 +15,18 @@
 
 {% block body_block %}
     <main>
-        <section>
-            <h4>The <h4><i> first </i></h4> money management system that gives <i> you </i> control</h4>
-            <button>Sign Up</button>
+        <section class = "center">
+            <h4>The <i>first </i> money management system that gives <i> you </i> control</h4>
+            <button><a href="{% url 'signup' %}">Sign Up</a></button>
         </section>
         <hr>
         <section>
-            <img src="" alt="img1">
-            <img src="" alt="img2">
+            <img src="{% static 'images/StockMarket.jpg' %}" alt="img1" class = "home_img">
+            <img src="{% static 'images/PieChart.jpg' %}" alt="img2" class = "home_img">
         </section>
-        <section>
+        <section class = 'center'>
             <p>
-                Intro text
+                Finance Manager is at the forefront of saving technology. Our idea came from one of our group members who is horribly addicted to gambling and needed a way of controlling his spending.
             </p>
         </section>
     </main>
