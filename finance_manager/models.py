@@ -44,7 +44,7 @@ class Budget(models.Model):
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
     date = models.DateField()
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
-    price = models.FloatField(validators=[MinValueValidator(0)])
+    amount = models.FloatField(validators=[MinValueValidator(0)]) # Amount of money budgeted for the category
 
     class Meta:
         unique_together = ('date', 'financial_account')

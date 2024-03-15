@@ -4,6 +4,15 @@
     Home - Finance Manager
 {% endblock %}
 
+{% block log_in %}
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}">Logout</a>
+{%else%}
+<a href="{% url 'login' %}">Log in</a>
+{% endif %}
+{% endblock%}
+
+
 {% block body_block %}
     <header>
         <h1>Welcome to the Finance Manager App</h1>
@@ -24,9 +33,19 @@
         </nav>
     </header>
     <main>
+        <section class = "center">
+            <h4>The <i>first </i> money management system that gives <i> you </i> control</h4>
+            <button><a href="{% url 'signup' %}">Sign Up</a></button>
+        </section>
+        <hr>
         <section>
-            <h2>Manage Your Finances</h2>
-            <p>Keep track of your income, expenses, and budget all in one place. Test Branch </p>
+            <img src="{% static 'images/StockMarket.jpg' %}" alt="img1" class = "home_img">
+            <img src="{% static 'images/PieChart.jpg' %}" alt="img2" class = "home_img">
+        </section>
+        <section class = 'center'>
+            <p>
+                Finance Manager is at the forefront of saving technology. Our idea came from one of our group members who is horribly addicted to gambling and needed a way of controlling his spending.
+            </p>
         </section>
     </main>
 {% endblock %}
