@@ -1,5 +1,5 @@
 {% extends 'base.html' %}  
-{% load static %}  <!-- Updated from staticfiles to static for newer Django versions -->
+{% load static %}  
 {% block title_block %}
     Home - Finance Manager
 {% endblock %}
@@ -14,6 +14,24 @@
 
 
 {% block body_block %}
+    <header>
+        <h1>Welcome to the Finance Manager App</h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'password_change' %}">Change Password</a></li>
+                    {% if user.is_superuser %}
+                        <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                    {% endif %}
+                    
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
     <main>
         <section class = "center">
             <h4>The <i>first </i> money management system that gives <i> you </i> control</h4>
@@ -32,3 +50,6 @@
     </main>
 {% endblock %}
 
+{% block sidebar_block %}
+    Custom sidebar content for home page.
+{% endblock %}

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # maybe need to add django.contrib.finance_manager
+    'finance_manager',
 ]
 
 MIDDLEWARE = [
