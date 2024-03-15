@@ -28,3 +28,33 @@ def signup_view(request):
 
 def home_view(request):
     return render(request, 'home.html')
+
+def signup(request):
+    return render(request, 'signUp.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def contact_us(request):
+    return render(request, 'contactUs.html')
+
+def about(request):
+    return render(request, 'aboutUs.html')
+
+def user_account(request):
+    return render(request, 'userAccountPage.html')
+
+def financial_account(request):
+    return render(request, 'financialAccount.html')
+
+def add_new_account(request):
+    return render(request, 'newAccount.html')
+
+def budget(request):
+    return render(request, 'budget.html')
+
+def income_expenditure(request):
+    return render(request, 'incomeOutcome.html')
+
+def analytics(request):
+    return render(request, 'analysis.html')
