@@ -62,9 +62,8 @@ def add_new_account(request):
 def budget(request):
     return render(request, 'budget.html')
 
-
 def income_expenditure(request):
     return render(request, 'incomeOutcome.html')
 
-def analytics(request):
+def analysis(request):
     return render(request, 'analysis.html')

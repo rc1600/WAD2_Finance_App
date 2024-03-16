@@ -36,7 +36,7 @@ urlpatterns = [
     path('add-new-account/', views.add_new_account, name='add_new_account'),  # Corrected the dash
     path('budget/', views.budget, name='budget'),
     path('income-expenditure/', views.income_expenditure, name='income_expenditure'),  # Corrected the dash
-    path('analytics/', views.analytics, name='analytics'),
+    path('analysis/', views.analysis, name='analysis'),
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     ]
