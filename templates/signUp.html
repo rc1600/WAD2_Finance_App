@@ -8,8 +8,9 @@
     {% csrf_token %}
     {{ form.username }}
     {{ form.email}}
-    {{ form.password1 }}
-    <button type="submit" class = "input_button">Sign Up</button>
+    {{ form.password1 }} 
+    {{ form.password2 }}
+    <button type="submit" class = "center">Sign Up</button>
 </form>
 </section>
 

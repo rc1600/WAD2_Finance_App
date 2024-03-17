@@ -6,6 +6,9 @@ from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
+import pydot
+from django.http import HttpResponse
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -21,6 +24,7 @@ def signup_view(request):
                 # User might not be active, or authentication backend is not returning the user
                 messages.error(request, "Account created successfully, please verify your email before login.")
         else:
+            print(form.errors)
             messages.error(request, "There was a problem with the registration. Please try again.")
     else:
         form = CustomUserCreationForm()  # If not a post request, create an empty form
@@ -44,27 +48,42 @@ def login_view(request):  # Use this function as the login view
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def contact_us(request):
+def create_graph(request):
+    sample_data = {'A': {'size': 30, 'color': 'red'},
+                   'B': {'size': 40, 'color': 'blue'},
+                   'C': {'size': 20, 'color': 'green'},
+                   'D': {'size': 10, 'color': 'yellow'}}
+
+    graph = pydot.Dot(graph_type='graph')
+
+    for label, node_data in sample_data.items():
+        node = pydot.Node(label, shape='circle', width=str(node_data['size']), style='filled', fillcolor=node_data['color'])
+        graph.add_node(node)
+
+    image_data = graph.create_png(prog='circo')
+
+    return HttpResponse(image_data, content_type='image/png')
+
+def contactUs(request):
     return render(request, 'contactUs.html')
 
 def about(request):
     return render(request, 'aboutUs.html')
 
-def user_account(request):
+def userAccountPage(request):
     return render(request, 'userAccountPage.html')
 
-def financial_account(request):
+def financialAccount(request):
     return render(request, 'financialAccount.html')
 
-def add_new_account(request):
+def newAccount(request):
     return render(request, 'newAccount.html')
 
 def budget(request):
     return render(request, 'budget.html')
 
-
-def income_expenditure(request):
+def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
 
-def analytics(request):
+def analysis(request):
     return render(request, 'analysis.html')
