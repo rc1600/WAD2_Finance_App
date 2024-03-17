@@ -7,6 +7,7 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
+from .models import FinancialAccount, UserProfile
 import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
@@ -46,7 +47,7 @@ def login_view(request):  # Use this function as the login view
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())  # Use the aliased auth_login
-            return redirect(reverse('home'))
+            return redirect(reverse('userAccountPage'))
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -81,7 +82,11 @@ def about(request):
     return render(request, 'aboutUs.html')
 
 def userAccountPage(request):
-    return render(request, 'userAccountPage.html')
+    userProfile = UserProfile.objects.all()
+    print(len(userProfile))
+    #userProfile =  UserProfile.objects.get(user = request.user)
+    #bank_accounts = FinancialAccount.objects.filter(username=request.user)
+    return render(request, 'userAccountPage.html', {'bank_accounts': userProfile})
 
 def financialAccount(request):
     return render(request, 'financialAccount.html')
