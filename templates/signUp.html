@@ -4,12 +4,12 @@
 
 <section class = "center">
 <h2>Sign Up</h2>
-<form method="post" class = "login">
+<form method="post" class = "login center">
     {% csrf_token %}
     {{ form.username }}
     {{ form.email}}
-    {{form.password}}
-    <button type="submit" class = "center">Sign Up</button>
+    {{ form.password1 }}
+    <button type="submit" class = "input_button">Sign Up</button>
 </form>
 </section>
 
