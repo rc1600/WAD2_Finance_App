@@ -29,14 +29,15 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('', views.home_view, name='home'),
-    path('contact-us/', views.contact_us, name='contact_us'),  #
+    path('contact-us/', views.contactUs, name='contact_us'),
     path('about/', views.about, name='about'),
-    path('user-account/', views.user_account, name='user_account'),  # Corrected the dash
-    path('financial-account/', views.financial_account, name='financial_account'),  # Corrected the dash
-    path('add-new-account/', views.add_new_account, name='add_new_account'),  # Corrected the dash
+    path('user-account/', views.userAccountPage, name='userAccountPage'),
+    path('financial-account/', views.financialAccount, name='financial_account'),
+    path('add-new-account/', views.newAccount, name='newAccount'),
     path('budget/', views.budget, name='budget'),
-    path('income-expenditure/', views.income_expenditure, name='income_expenditure'),  # Corrected the dash
+    path('income-expenditure/', views.incomeOutcome, name='incomeOutcome'),
     path('analysis/', views.analysis, name='analysis'),
+    path('graph_plot/', views.create_graph, name='graph_plot'),
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     ]
