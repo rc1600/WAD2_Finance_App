@@ -1,10 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Analytics{% endblock %}
 
 {% block body_block %}
     <h1>Analytics</h1>
-    <img src="{% url 'graph_plot' %}" alt="Pie Chart Graph">
+    <img src="{% static 'pie_chart.png' %}" alt="Pie Chart Graph">
 {% endblock %}
-
-

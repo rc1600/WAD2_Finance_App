@@ -103,13 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#Graphing
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -128,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [STATIC_DIR, ]
+STATICFILES_DIRS = [STATIC_DIR, os.path.join(BASE_DIR, 'static'),]
 
 
 LOGIN_REDIRECT_URL = 'home'

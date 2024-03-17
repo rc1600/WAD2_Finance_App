@@ -6,8 +6,11 @@ from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
-import pydot
-from django.http import HttpResponse
+import os
+import matplotlib.pyplot as plt
+from django.conf import settings
+from django.templatetags.static import static
+from django.shortcuts import HttpResponse
 
 
 def signup_view(request):
@@ -49,20 +52,27 @@ def login_view(request):  # Use this function as the login view
     return render(request, 'login.html', {'form': form})
 
 def create_graph(request):
-    sample_data = {'A': {'size': 30, 'color': 'red'},
-                   'B': {'size': 40, 'color': 'blue'},
-                   'C': {'size': 20, 'color': 'green'},
-                   'D': {'size': 10, 'color': 'yellow'}}
+    static_dir = settings.STATICFILES_DIRS[1]  # Get the first directory in STATICFILES_DIRS
+    image_path = os.path.join(static_dir, 'pie_chart.png')
 
-    graph = pydot.Dot(graph_type='graph')
+    if not os.path.exists(image_path):
+        sample_data = {'A': {'size': 30, 'color': 'red'},
+                       'B': {'size': 40, 'color': 'blue'},
+                       'C': {'size': 20, 'color': 'green'},
+                       'D': {'size': 10, 'color': 'yellow'}}
 
-    for label, node_data in sample_data.items():
-        node = pydot.Node(label, shape='circle', width=str(node_data['size']), style='filled', fillcolor=node_data['color'])
-        graph.add_node(node)
+        labels = sample_data.keys()
+        sizes = [node_data['size'] for node_data in sample_data.values()]
+        colors = [node_data['color'] for node_data in sample_data.values()]
 
-    image_data = graph.create_png(prog='circo')
+        plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
+        plt.axis('equal')
 
-    return HttpResponse(image_data, content_type='image/png')
+        plt.savefig(image_path)
+        plt.close()
+
+    return image_path
+
 
 def contactUs(request):
     return render(request, 'contactUs.html')
