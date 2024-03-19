@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -39,8 +40,6 @@ def signup_view(request):
 def home_view(request):
     return render(request, 'home.html')
 
-def signup(request):
-    return render(request, 'signUp.html')
 
 def login_view(request):  # Use this function as the login view
     if request.method == 'POST':
@@ -81,12 +80,12 @@ def contactUs(request):
 def about(request):
     return render(request, 'aboutUs.html')
 
+@login_required
 def userAccountPage(request):
-    userProfile = UserProfile.objects.all()
-    print(len(userProfile))
-    #userProfile =  UserProfile.objects.get(user = request.user)
-    #bank_accounts = FinancialAccount.objects.filter(username=request.user)
-    return render(request, 'userAccountPage.html', {'bank_accounts': userProfile})
+    userProfile =  UserProfile.objects.get(user = request.user)
+    print(userProfile)
+    bank_accounts = FinancialAccount.objects.filter(username = userProfile)
+    return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
 def financialAccount(request):
     return render(request, 'financialAccount.html')
