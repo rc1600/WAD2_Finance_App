@@ -71,7 +71,7 @@ def create_graph(request):
         plt.savefig(image_path)
         plt.close()
 
-    return image_path
+    return image_path, render(request, 'analysis.html')
 
 
 def contactUs(request):
