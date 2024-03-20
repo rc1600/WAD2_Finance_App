@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from finance_manager.categories import CATEGORIES
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.utils import timezone
 
 class UserProfile(models.Model):
     NAME_MAX_LENGTH = 128
@@ -71,3 +72,12 @@ class Expense(models.Model):
 
     class Meta:
         unique_together = ('date', 'financial_account')
+        
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"Message from {self.name} at {self.created_at}"

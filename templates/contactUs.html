@@ -1,15 +1,43 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+Contact Us - Finance Manager
+{% endblock %}
 
 {% block body_block %}
+<header>
+    <nav>
+        <ul class="nav_elements">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% if user.is_superuser %}
+                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            {% endif %}
+            <li><a href="{% url 'about' %}">Who We Are</a></li>
+            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main class="center">
+    <section>
+        <h2>Contact Finance Manager</h2>
+        <p>We're here to help and answer any question you might have. We look forward to hearing from you.</p>
+    </section>
+    <hr>
+    <section class="login center">
+        <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="input_button">Send Message</button>
+        </form>
+        
+    </section>
+</main>
 
-
-
-
-
-
-
-
-
-
-
-{%endblock%}
+{% endblock %}
