@@ -67,5 +67,10 @@ class ExpenseForm(forms.ModelForm):
     class Meta:
         model = Expense
         fields = ['date', 'category', 'product_name', 'price']
-        exclude = ['financial_account']
-        
+        exclude = ['financial_account']    
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Your Name'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Your Email'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message'}))
+

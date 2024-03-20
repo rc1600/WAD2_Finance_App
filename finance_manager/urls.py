@@ -20,7 +20,8 @@ from . import views
 from .views import home_view
 from .views import signup_view
 from .views import login_view
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -39,4 +40,8 @@ urlpatterns = [
     path('analysis/', views.analysis, name='analysis'),
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('contact/', views.contact_form_submit, name='contact_form_submit'),
     ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
