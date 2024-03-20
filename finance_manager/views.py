@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, FinancialAccountForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
@@ -83,7 +83,6 @@ def about(request):
 @login_required
 def userAccountPage(request):
     userProfile =  UserProfile.objects.get(user = request.user)
-    print(userProfile)
     bank_accounts = FinancialAccount.objects.filter(username = userProfile)
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
@@ -91,7 +90,18 @@ def financialAccount(request):
     return render(request, 'financialAccount.html')
 
 def newAccount(request):
-    return render(request, 'newAccount.html')
+    if request.method == 'POST':
+        form = FinancialAccountForm(request.POST)
+        if form.is_valid():
+            userProfile =  UserProfile.objects.get(user = request.user)
+            form.save(userProfile)  # Save the new user to the database
+            redirect(reverse('userAccountPage'))
+        else:
+            print(form.errors)
+            messages.error(request, "There was a problem with the registration. Please try again.")
+    else:
+        form = FinancialAccountForm()  # If not a post request, create an empty form
+    return render(request, 'newAccount.html', {"form":form})
 
 def budget(request):
     return render(request, 'budget.html')

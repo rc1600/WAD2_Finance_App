@@ -36,10 +36,20 @@ class UserProfileForm(forms.ModelForm):
         exclude = ['slug']
         
 class FinancialAccountForm(forms.ModelForm):
+
+    financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
+    savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
+    current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
+    #what is the point of these balances
+
     class Meta:
         model = FinancialAccount
         fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance']
-        exclude = ['username', 'slug']
+        exclude = ['username']
+
+    def save(self, user, *args, **kwargs):
+        self.instance.username = user
+        return super().save(*args, **kwargs)
         
 class BudgetForm(forms.ModelForm):
     class Meta:
