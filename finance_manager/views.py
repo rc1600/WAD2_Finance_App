@@ -51,27 +51,16 @@ def login_view(request):  # Use this function as the login view
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def create_graph(request):
-    static_dir = settings.STATICFILES_DIRS[1]  # Get the first directory in STATICFILES_DIRS
-    image_path = os.path.join(static_dir, 'pie_chart.png')
+from django.shortcuts import render
 
-    if not os.path.exists(image_path):
-        sample_data = {'A': {'size': 30, 'color': 'red'},
-                       'B': {'size': 40, 'color': 'blue'},
-                       'C': {'size': 20, 'color': 'green'},
-                       'D': {'size': 10, 'color': 'yellow'}}
+def analysis(request):
+    # Dummy data (replace this with your data retrieval logic)
+    data = {
+        'labels': ["January", "February", "March", "April", "May", "June", "July"],
+        'values': [65, 59, 80, 81, 56, 55, 40]
+    }
+    return render(request, 'analysis.html', context=data)
 
-        labels = sample_data.keys()
-        sizes = [node_data['size'] for node_data in sample_data.values()]
-        colors = [node_data['color'] for node_data in sample_data.values()]
-
-        plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
-        plt.axis('equal')
-
-        plt.savefig(image_path)
-        plt.close()
-
-    return image_path, render(request, 'analysis.html')
 
 
 def contactUs(request):

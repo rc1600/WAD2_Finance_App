@@ -37,7 +37,6 @@ urlpatterns = [
     path('budget/', views.budget, name='budget'),
     path('income-expenditure/', views.incomeOutcome, name='incomeOutcome'),
     path('analysis/', views.analysis, name='analysis'),
-    path('graph_plot/', views.create_graph, name='graph_plot'),
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     ]
