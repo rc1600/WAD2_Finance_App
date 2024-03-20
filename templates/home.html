@@ -4,25 +4,14 @@
     Home - Finance Manager
 {% endblock %}
 
-{% block log_in %}
-{% if user.is_authenticated %}
-<a href="{% url 'logout' %}">Logout</a>
-{%else%}
-<a href="{% url 'login' %}">Log in</a>
-{% endif %}
-{% endblock%}
-
 
 {% block body_block %}
     <header>
         <nav>
             <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
-                {%endif%}
             </ul>
         </nav>
     </header>

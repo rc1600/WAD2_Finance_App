@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
-
+{% load static %} <!-- not sure why its making me use this as its already stated in base.html but alas i must-->
 {% block title_block %}
     User Account Page
 {% endblock %}
 
 {% block body_block %}
-    <h1>User Account Page</h1>
-        <ul>
-            <li><a href="{% url 'financial_account' %}">Financial Account</a></li>
-        </ul>
+    <h1>Welcome</h1>
+        <div>
+            <h2>Savings Account</h2>
+                {% if bank_accounts %}
+                    {% for bank_account in bank_accounts %}
+                    <li>{{bank_account}}</li>
+                    {% endfor %}
+                {% endif %}
+                <a href="{% url 'newAccount' %}"><img src="{% static 'images/PieChart.jpg' %}" alt=""></a>
+        </div>
 {% endblock %}

@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     slug = models.SlugField(unique=True)
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.email)
+        self.slug = slugify(self.user.email)
         super(UserProfile, self).save(*args,**kwargs)
     
     def __str__(self):

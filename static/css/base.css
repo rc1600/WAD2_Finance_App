@@ -84,9 +84,14 @@ button {
 }
 
 .input_button {
-    margin-top:50px;
+    margin-top:20px;
+    margin-bottom: 15px;
+
     border-style:solid;
     border-width: 1px;
+
+    height: 20px;
+    width:90px;
 }
 
 
@@ -109,6 +114,20 @@ nav a {
 
 button a {
     color:#000000;
+}
+
+h1 {
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
+
+    color: #F5F5F5;
+
+
 }
 
 h2 {
