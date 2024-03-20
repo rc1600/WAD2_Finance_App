@@ -76,47 +76,6 @@ def create_graph(request):
 
     return image_path, render(request, 'analysis.html')
 
-
-
-
-
-
-
-
-"""
-Romeo - Test Graph Code (Not Working)
-def create_graph(request):
-    # Generate the graph
-    sample_data = {'A': {'size': 30, 'color': 'red'},
-                   'B': {'size': 40, 'color': 'blue'},
-                   'C': {'size': 20, 'color': 'green'},
-                   'D': {'size': 10, 'color': 'yellow'}}
-
-    labels = sample_data.keys()
-    sizes = [node_data['size'] for node_data in sample_data.values()]
-    colors = [node_data['color'] for node_data in sample_data.values()]
-
-    plt.pie(sizes, labels=labels, colors=colors, autopct='%1.1f%%', startangle=140)
-    plt.axis('equal')
-
-    # Save the graph to a bytes buffer
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    plt.close()
-    buffer.seek(0)
-
-    # Save the buffer contents in the media root
-    file_name = 'pie_chart.png'
-    file_path = default_storage.save(file_name, ContentFile(buffer.read()))
-
-    # Get the full URL to the image
-    full_url = default_storage.url(file_path)
-
-    return render(request, 'analysis.html', {'graph_url': full_url})
-"""
-
-
-
 def contactUs(request):
     return render(request, 'contactUs.html')
 
