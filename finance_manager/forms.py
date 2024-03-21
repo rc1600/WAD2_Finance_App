@@ -40,11 +40,13 @@ class FinancialAccountForm(forms.ModelForm):
     financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
     savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
     current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
+    picture = forms.ImageField(required=True)
+    
     #what is the point of these balances
 
     class Meta:
         model = FinancialAccount
-        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance']
+        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance','picture']
         exclude = ['username']
 
     def save(self, user, *args, **kwargs):

@@ -10,7 +10,10 @@
             <h2>Savings Account</h2>
                 {% if bank_accounts %}
                     {% for bank_account in bank_accounts %}
-                    <li>{{bank_account}}</li>
+                        <a href="{% url 'financial_account' bank_account.slug %}">
+                            <p>{{ bank_account.financial_account_name }}</p>
+                            <img src="{{MEDIA_URL}}{{ bank_account.picture }}" alt="this isn't loading">
+                        </a>
                     {% endfor %}
                 {% endif %}
                 <a href="{% url 'newAccount' %}"><img src="{% static 'images/PieChart.jpg' %}" alt=""></a>
