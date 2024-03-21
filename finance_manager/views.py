@@ -106,12 +106,21 @@ def financialAccount(request, account_slug):
     return render(request, 'financialAccount.html', context_dict)
 
 def newAccount(request):
+
+    MAX_ACCOUNTS_PER_USER = 3
+
     if request.method == 'POST':
         form = FinancialAccountForm(request.POST, request.FILES)
         if form.is_valid():
             userProfile =  UserProfile.objects.get(user = request.user)
-            form.save(userProfile)
-            redirect(reverse('userAccountPage'))
+            num_existing_accounts = FinancialAccount.objects.filter(username=userProfile).count()
+            if num_existing_accounts >= MAX_ACCOUNTS_PER_USER:
+                # If the maximum limit is reached, display an error message
+                messages.error(request, f"You can only have a maximum of {MAX_ACCOUNTS_PER_USER} accounts.")
+                return redirect(reverse('userAccountPage'))
+            else:
+                form.save(userProfile)
+                return redirect(reverse('userAccountPage'))
         else:
             print(form.errors)
             messages.error(request, "There was a problem creating a new account. Please try again.")
