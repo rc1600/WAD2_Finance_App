@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError  
 from .models import UserProfile, Income, Expense, FinancialAccount, Budget
 
-class CustomUserCreationForm(UserCreationForm):  
+class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label='Email', widget=forms.TextInput(attrs={'placeholder': 'Enter your email', 'class':'inputs'}))
     username = forms.CharField(required=True, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter your username', 'class':'inputs'}))
     password1 = forms.CharField(required=True, max_length=150, widget=forms.PasswordInput(attrs={'placeholder': 'Password','class':'inputs'}))
@@ -16,18 +16,28 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
-        new = User.objects.filter(email=email)
-        if new.exists():
+        if User.objects.filter(email=email).exists():
             raise ValidationError("Email already exists")
         return email
 
-    def save(self, commit=True):
-        user = super(CustomUserCreationForm, self).save(commit=False)
-        user.email = self.cleaned_data["email"]
-        if commit:
-            user.save()
-            UserProfile.objects.create(user = user)
-        return user
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) < 10:
+            raise ValidationError("Username must be at least 10 characters long")
+        return username
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        if len(password1) < 8:
+            raise ValidationError("Password must be at least 8 characters long")
+        return password1
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords do not match")
+        return password2
     
 class UserProfileForm(forms.ModelForm):
     class Meta:
