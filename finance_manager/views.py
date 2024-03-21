@@ -8,7 +8,7 @@ from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
-from .models import FinancialAccount, UserProfile, ContactMessage
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
 #import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
@@ -18,8 +18,7 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
 import plotly.graph_objs as go
-from .models import Expense
-
+from .forms import BudgetForm
 
 
 def signup_view(request):
@@ -121,7 +120,20 @@ def newAccount(request):
     return render(request, 'newAccount.html', {"form":form})
 
 def budget(request):
-    return render(request, 'budget.html')
+    if request.method == 'POST':
+        form = BudgetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('budget')
+    else:
+        form = BudgetForm()
+
+    existing_budget = Budget.objects.all()
+
+    return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
+
+
+
 
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
