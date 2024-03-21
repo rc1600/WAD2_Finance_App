@@ -1,0 +1,14 @@
+{% extend 'base.html' %}
+{% load static %}
+
+{% block title_block %}
+Income / Spending Page
+{% endblock %}
+{% block body_block %}
+
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
+
+{% endblock %}

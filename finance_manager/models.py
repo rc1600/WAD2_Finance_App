@@ -5,6 +5,14 @@ from finance_manager.categories import CATEGORIES
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
+import os
+
+def user_dir_path(account, filename):
+        directory = f'images/pfp/{account.username.user}'
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = os.path.join(directory, f'{account.financial_account_name}.jpg')
+        return file_path
 
 class UserProfile(models.Model):
     NAME_MAX_LENGTH = 128
@@ -28,6 +36,8 @@ class FinancialAccount(models.Model):
     savings_balance = models.FloatField(validators=[MinValueValidator(0)])
     current_balance = models.FloatField(validators=[MinValueValidator(0)])
     slug = models.SlugField(unique=True)
+    picture = models.ImageField(upload_to=user_dir_path)
+
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.financial_account_name)

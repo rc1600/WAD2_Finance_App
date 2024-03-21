@@ -4,9 +4,20 @@
     About us 
 {% endblock %}
 {% block body_block %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
         <section class = 'center'>
             <p>
                 Finance Manager is at the forefront of saving technology. Our idea came from one of our group members who is horribly addicted to gambling and needed a way of controlling his spending.
+            </p>
+            <br>
+            <p>
+                We aim to provide our service to anyone who is in need of a concise method to track their income and outcome, and to set budgets.
             </p>
         </section>
     </main>

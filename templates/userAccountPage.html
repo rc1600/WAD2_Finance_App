@@ -1,18 +1,32 @@
 {% extends 'base.html' %}
-{% load static %} <!-- not sure why its making me use this as its already stated in base.html but alas i must-->
+{% load static %}
+
 {% block title_block %}
     User Account Page
 {% endblock %}
 
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/userAccount.css' %}">
+{% endblock %}
+
 {% block body_block %}
     <h1>Welcome</h1>
-        <div>
-            <h2>Savings Account</h2>
-                {% if bank_accounts %}
-                    {% for bank_account in bank_accounts %}
-                    <li>{{bank_account}}</li>
-                    {% endfor %}
-                {% endif %}
-                <a href="{% url 'newAccount' %}"><img src="{% static 'images/PieChart.jpg' %}" alt=""></a>
+    <div class="account-container">
+        <h2>Savings Account</h2>
+        {% if bank_accounts %}
+            {% for bank_account in bank_accounts %}
+                <div class="account-item">
+                    <a href="{% url 'financial_account' bank_account.slug %}">
+                        <p>{{ bank_account.financial_account_name }}</p>
+                        <img src="{{ MEDIA_URL }}{{ bank_account.picture }}" alt="this isn't loading">
+                    </a>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="account-item">
+            <a href="{% url 'newAccount' %}">
+                <img src="{% static 'images/PieChart.jpg' %}" alt="">
+            </a>
         </div>
+    </div>
 {% endblock %}

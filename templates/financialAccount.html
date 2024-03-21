@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Financial Account{% endblock %}
+{% block title_block %}
+    {% if financial_account %}
+        {{ financial_account.name }}
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
 
 {% block body_block %}
-    <h1>Financial Account</h1>
+{% if financial_account %}
+<h1>{{ financial_account.name }}</h1>
+{% endif %}
     <ul>
         <li><a href="{% url 'budget' %}">Budget</a></li>
         <li><a href="{% url 'incomeOutcome' %}">Income/Outcome</a></li>
         <li><a href="{% url 'analysis' %}">Analytics</a></li>
-    </ul>
+    </ul><br><br>
+
+    <p>
+        This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
+    </p>
 {% endblock %}
 

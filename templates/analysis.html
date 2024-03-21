@@ -1,52 +1,32 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static %} 
+{% block title_block %}Analysis
 
-{% block title %}Analysis{% endblock %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
+{% endblock %}
 
-{% block content %}
+{% block body_block %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
 <div>
-    <h1>Analysis Page</h1>
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <h1>Expense Analysis</h1>
+    <div id="plot"></div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var plot_div = "{{ plot_div|safe }}";
+        
+    </script>
 </div>
-
-<script src="{% static 'chart.js' %}"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'pie',  
-            data: {
-                labels: {{ data.labels|safe }},
-                datasets: [{
-                    label: 'Expense Amount',  
-                    data: {{ data.values|safe }},
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'bottom',
-                }
-            }
-        });
-    });
-</script>
 {% endblock %}

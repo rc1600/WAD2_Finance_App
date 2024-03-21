@@ -7,23 +7,15 @@ Contact Us - Finance Manager
 {% endblock %}
 
 {% block body_block %}
-<header>
-    <nav>
-        <ul class="nav_elements">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            {% if user.is_superuser %}
-                <li><a href="{% url 'admin:index' %}">Admin</a></li>
-            {% endif %}
-            <li><a href="{% url 'about' %}">Who We Are</a></li>
-            <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Log out</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
+
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
+
 <main class="center">
     <section>
         <h2>Contact Finance Manager</h2>

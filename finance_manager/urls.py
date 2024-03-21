@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import home_view
+from .views import home_view, userAccountPage
 from .views import signup_view
 from .views import login_view
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import analysis_view
 
 
 urlpatterns = [
@@ -33,11 +34,11 @@ urlpatterns = [
     path('contact-us/', views.contactUs, name='contact_us'),
     path('about/', views.about, name='about'),
     path('user-account/', views.userAccountPage, name='userAccountPage'),
-    path('financial-account/', views.financialAccount, name='financial_account'),
+    path('financial-account/<slug:account_slug>/', views.financialAccount, name='financial_account'),
     path('add-new-account/', views.newAccount, name='newAccount'),
     path('budget/', views.budget, name='budget'),
     path('income-expenditure/', views.incomeOutcome, name='incomeOutcome'),
-    path('analysis/', views.analysis, name='analysis'),
+    path('analysis/', analysis_view, name='analysis'),
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('contact/', views.contact_form_submit, name='contact_form_submit'),
