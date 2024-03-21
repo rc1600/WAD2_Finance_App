@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import home_view
+from .views import home_view, userAccountPage
 from .views import signup_view
 from .views import login_view
 from django.conf import settings

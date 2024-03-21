@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
 from .models import FinancialAccount, UserProfile, ContactMessage
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
 from django.shortcuts import HttpResponse
@@ -41,10 +41,9 @@ def signup_view(request):
 
     return render(request, 'signup.html', {'form': form})
 
-
 def home_view(request):
     return render(request, 'home.html')
-
+    
 
 def login_view(request):  # Use this function as the login view
     if request.method == 'POST':
@@ -72,13 +71,26 @@ def analysis(request):
 def contactUs(request):
     return render(request, 'contactUs.html')
 
+def newSpending(request):
+    return render(request, 'newSpending.html')
+
+def incomeOutcome(request):
+    if request.method == 'POST':
+        return redirect('newSpending')
+    else:
+        return render(request, "incomeOutcome.html")
+    
 def about(request):
     return render(request, 'aboutUs.html')
 
 @login_required
 def userAccountPage(request):
-    userProfile =  UserProfile.objects.get(user = request.user)
-    bank_accounts = FinancialAccount.objects.filter(username = userProfile)
+    try:
+        userProfile =  UserProfile.objects.get(user = request.user)
+        bank_accounts = FinancialAccount.objects.filter(username = userProfile)
+    except ():
+        print("User not logged in")
+
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
 def financialAccount(request):
