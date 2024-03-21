@@ -1,14 +1,32 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static %} 
+{% block title_block %}Analysis
 
-{% block title %}Analysis{% endblock %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
+{% endblock %}
 
-{% block content %}
+{% block body_block %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
 <div>
-    <h1>Analysis Page</h1>
-    <canvas id="myChart" width="400" height="400"></canvas>
-</div>
+    <h1>Expense Analysis</h1>
+    <div id="plot"></div>
 
-<script src="{% static 'chart.js' %}"></script>
-<script src="{% static 'chart_script.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var plot_div = "{{ plot_div|safe }}";
+        
+    </script>
+</div>
 {% endblock %}

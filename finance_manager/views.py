@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
 from .models import FinancialAccount, UserProfile, ContactMessage
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
 from django.shortcuts import HttpResponse
@@ -17,7 +17,9 @@ import io
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
+import plotly.graph_objs as go
 from .models import Expense
+
 
 
 def signup_view(request):
@@ -41,10 +43,9 @@ def signup_view(request):
 
     return render(request, 'signup.html', {'form': form})
 
-
 def home_view(request):
     return render(request, 'home.html')
-
+    
 
 def login_view(request):  # Use this function as the login view
     if request.method == 'POST':
@@ -56,22 +57,33 @@ def login_view(request):  # Use this function as the login view
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def analysis(request):
+def analysis_view(request):
     expenses = Expense.objects.all()
-    
     labels = [expense.product_name for expense in expenses]
     values = [expense.price for expense in expenses]
-    
-    data = {
-        'labels': labels,
-        'values': values,
-    }
-    
-    return render(request, 'analysis.html', {'data': data})
+
+    trace = go.Pie(labels=labels, values=values)
+
+    layout = go.Layout(title='Expense Analysis')
+
+    fig = go.Figure(data=[trace], layout=layout)
+
+    plot_div = fig.to_html(full_html=False)
+
+    return render(request, 'analysis.html', {'plot_div': plot_div})
 
 def contactUs(request):
     return render(request, 'contactUs.html')
 
+def newSpending(request):
+    return render(request, 'newSpending.html')
+
+def incomeOutcome(request):
+    if request.method == 'POST':
+        return redirect('newSpending')
+    else:
+        return render(request, "incomeOutcome.html")
+    
 def about(request):
     return render(request, 'aboutUs.html')
 
@@ -91,6 +103,9 @@ def financialAccount(request, account_slug):
     return render(request, 'financialAccount.html', context_dict)
 
 def newAccount(request):
+
+    MAX_ACCOUNTS_PER_USER = 3
+
     if request.method == 'POST':
         form = FinancialAccountForm(request.POST, request.FILES)
         if form.is_valid():
@@ -110,9 +125,6 @@ def budget(request):
 
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
-
-def analysis(request):
-    return render(request, 'analysis.html')
 
 from .models import ContactMessage
 
