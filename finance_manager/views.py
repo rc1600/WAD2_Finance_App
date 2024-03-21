@@ -18,7 +18,13 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
 import plotly.graph_objs as go
+<<<<<<< HEAD
 from .forms import BudgetForm
+=======
+from .models import Expense
+
+from .models import Expense, FinancialAccount
+>>>>>>> 9ceac3f1a36ad24892a9f8dab2c0bd7fa27aff2f
 
 
 def signup_view(request):
@@ -156,3 +162,9 @@ def contact_form_submit(request):
         form = ContactForm()
 
     return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
+
+def delete_financial_account(request, id):
+    model = FinancialAccount
+    to_delete = model.objects.get(id=id)
+    to_delete.delete()
+    return redirect('/user-account')
