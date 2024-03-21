@@ -21,25 +21,18 @@ import plotly.graph_objs as go
 from .models import Expense
 
 
-
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the new user to the database
+            user = form.save()
             user = authenticate(username=form.cleaned_data['username'],
                                 password=form.cleaned_data['password1'])
             if user is not None and user.is_active:
-                login(request, user)  # Log the user in
-                return redirect(reverse('userAccountPage'))  # Redirect to home page
-            else:
-                # User might not be active, or authentication backend is not returning the user
-                messages.error(request, "Account created successfully, please verify your email before login.")
-        else:
-            print(form.errors)
-            messages.error(request, "There was a problem with the registration. Please try again.")
+                login(request, user)
+                return redirect(reverse('userAccountPage'))  
     else:
-        form = CustomUserCreationForm()  # If not a post request, create an empty form
+        form = CustomUserCreationForm()
 
     return render(request, 'signup.html', {'form': form})
 

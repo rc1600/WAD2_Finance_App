@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError  
 from .models import UserProfile, Income, Expense, FinancialAccount, Budget
 
-class CustomUserCreationForm(UserCreationForm):  
+class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label='Email', widget=forms.TextInput(attrs={'placeholder': 'Enter your email', 'class':'inputs'}))
     username = forms.CharField(required=True, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Enter your username', 'class':'inputs'}))
     password1 = forms.CharField(required=True, max_length=150, widget=forms.PasswordInput(attrs={'placeholder': 'Password','class':'inputs'}))
@@ -14,20 +14,36 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = ("username", "email", "password1", "password2")
 
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if len(username) < 8:
+            raise ValidationError("Username must be at least 8 characters long.")
+        return username
+
     def clean_email(self):
-        email = self.cleaned_data['email'].lower()
-        new = User.objects.filter(email=email)
-        if new.exists():
-            raise ValidationError("Email already exists")
+        email = self.cleaned_data.get("email")
+        if not email:
+            raise ValidationError("Email field is required.")
+        
         return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if len(password2) < 8:
+            raise ValidationError("Password must be at least 8 characters long.")
+        if password1 != password2:
+            raise ValidationError("The two password fields didn't match.")
+        return password2
 
     def save(self, commit=True):
         user = super(CustomUserCreationForm, self).save(commit=False)
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
-            UserProfile.objects.create(user = user)
+            UserProfile.objects.create(user=user)
         return user
+
     
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -40,13 +56,11 @@ class FinancialAccountForm(forms.ModelForm):
     financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
     savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
     current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
-    picture = forms.ImageField(required=True)
-    
     #what is the point of these balances
 
     class Meta:
         model = FinancialAccount
-        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance','picture']
+        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance']
         exclude = ['username']
 
     def save(self, user, *args, **kwargs):

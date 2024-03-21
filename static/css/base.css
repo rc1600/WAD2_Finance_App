@@ -207,4 +207,7 @@ a, a:hover, a:visited, a:active {
     text-decoration: none;
 }
 
-
+.error {
+    color: red;
+    font-size: 0.8em;
+}
