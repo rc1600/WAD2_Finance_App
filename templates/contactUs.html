@@ -8,6 +8,14 @@ Contact Us - Finance Manager
 
 {% block body_block %}
 
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
+
 <main class="center">
     <section>
         <h2>Contact Finance Manager</h2>
