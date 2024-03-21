@@ -1,40 +1,43 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/budget.css' %}">
+{% endblock %}
 
 {% block title_block %}
     Budget - Finance Manager
 {% endblock %}
 
 {% block body_block %}
-    <header>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'analysis' %}">Analysis</a></li>
-                    <li><a href="{% url 'home' %}">Back to Home</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="center">
-            <h4>The <i>first</i> money management system that gives <i>you</i> control</h4>
-        </section>
+    <div class="center">
+        <header class="header-center">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
+                        <li><a href="{% url 'home' %}">Back to Home</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <h4>Budget Manager</h4>
         <hr>
-        <section>
-            <img src="{% static 'images/StockMarket.jpg' %}" alt="img1" class="home_img">
-            <img src="{% static 'images/PieChart.jpg' %}" alt="img2" class="home_img">
-        </section>
-        <section class="center">
-            {% if existing_budget %}
+        <div class="images-section">
+            <img src="{% static 'images/budget_1.jpg' %}" alt="Budget Checklist" class="home_img">
+            <img src="{% static 'images/budget_2.jpg' %}" alt="Budget Manager" class="home_img">
+        </div>
+        {% if existing_budget %}
+            <section>
                 <h2>Existing Budget:</h2>
                 <ul>
                     {% for budget in existing_budget %}
                         <li>{{ budget.date }} - Category: {{ budget.category }}, Amount: {{ budget.amount }}</li>
                     {% endfor %}
                 </ul>
-            {% endif %}
+            </section>
+        {% endif %}
+        <section>
             <form method="post" id="budget-form">
                 {% csrf_token %}
                 <div class="form-field">
@@ -53,4 +56,5 @@
             </form>
         </section>
     </main>
+    </div>
 {% endblock %}
