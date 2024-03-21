@@ -42,6 +42,7 @@ urlpatterns = [
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('contact/', views.contact_form_submit, name='contact_form_submit'),
+    path('delete/', views.delete_financial_account, name='delete_financial_account'),
     ]
 
 if settings.DEBUG:
