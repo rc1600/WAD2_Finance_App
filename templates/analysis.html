@@ -1,14 +1,16 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block title %}Analysis{% endblock %}
+{% block title_block %}Analysis{% endblock %}
 
-{% block content %}
+{% block body_block %}
 <div>
-    <h1>Analysis Page</h1>
-    <canvas id="myChart" width="400" height="400"></canvas>
-</div>
+    <h1>Expense Analysis</h1>
+    <div id="plot"></div>
 
-<script src="{% static 'chart.js' %}"></script>
-<script src="{% static 'chart_script.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var plot_div = "{{ plot_div|safe }}";
+        
+    </script>
+</div>
 {% endblock %}

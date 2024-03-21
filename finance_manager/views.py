@@ -17,7 +17,9 @@ import io
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
+import plotly.graph_objs as go
 from .models import Expense
+
 
 
 def signup_view(request):
@@ -56,18 +58,20 @@ def login_view(request):  # Use this function as the login view
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def analysis(request):
+def analysis_view(request):
     expenses = Expense.objects.all()
-    
     labels = [expense.product_name for expense in expenses]
     values = [expense.price for expense in expenses]
-    
-    data = {
-        'labels': labels,
-        'values': values,
-    }
-    
-    return render(request, 'analysis.html', {'data': data})
+
+    trace = go.Pie(labels=labels, values=values)
+
+    layout = go.Layout(title='Expense Analysis')
+
+    fig = go.Figure(data=[trace], layout=layout)
+
+    plot_div = fig.to_html(full_html=False)
+
+    return render(request, 'analysis.html', {'plot_div': plot_div})
 
 def contactUs(request):
     return render(request, 'contactUs.html')
@@ -108,9 +112,6 @@ def budget(request):
 
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
-
-def analysis(request):
-    return render(request, 'analysis.html')
 
 from .models import ContactMessage
 
