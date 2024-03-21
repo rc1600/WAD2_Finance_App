@@ -12,21 +12,41 @@
 {% block body_block %}
     <h1>Welcome</h1>
     <div class="account-container">
-        <h2>Savings Account</h2>
-        {% if bank_accounts %}
-            {% for bank_account in bank_accounts %}
-                <div class="account-item">
-                    <a href="{% url 'financial_account' bank_account.slug %}">
-                        <p>{{ bank_account.financial_account_name }}</p>
-                        <img src="{{ MEDIA_URL }}{{ bank_account.picture }}" alt="this isn't loading">
-                    </a>
-                </div>
-            {% endfor %}
-        {% endif %}
-        <div class="account-item">
-            <a href="{% url 'newAccount' %}">
-                <img src="{% static 'images/PieChart.jpg' %}" alt="">
-            </a>
+        <div class="account-section">
+            {% if bank_accounts %}
+                {% for bank_account in bank_accounts %}
+                    <div class="account-item">
+                        <a href="{% url 'financial_account' bank_account.slug %}">
+                            <p>{{ bank_account.financial_account_name }}</p>
+                            <img src="{{ MEDIA_URL }}{{ bank_account.picture }}" alt="this isn't loading">
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="account-section">
+            <h2>Savings Account</h2>
+            <div class="account-item">
+                <a href="{% url 'newAccount' %}">
+                    <img src="{% static 'images/PieChart.jpg' %}" alt="" class="images">
+                </a>
+            </div>
+        </div>
+        <div class="account-section">
+            <h2>Current Account</h2>
+            <div class="account-item">
+                <a href="{% url 'newAccount' %}">
+                    <img src="{% static 'images/currentAccount.jpg' %}" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="account-section">
+            <h2>Add New Account</h2>
+            <div class="account-item">
+                <a href="{% url 'newAccount' %}">
+                    <img src="{% static 'images/addNewAccount.jpg' %}" alt="">
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

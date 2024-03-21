@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
-from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm
+from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
-from .models import FinancialAccount, UserProfile, ContactMessage
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
 #import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
@@ -19,6 +19,8 @@ from django.core.files.base import ContentFile
 from django.shortcuts import render
 import plotly.graph_objs as go
 from .models import Expense
+
+from .models import Expense, FinancialAccount
 
 
 
@@ -121,7 +123,20 @@ def newAccount(request):
     return render(request, 'newAccount.html', {"form":form})
 
 def budget(request):
-    return render(request, 'budget.html')
+    if request.method == 'POST':
+        form = BudgetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('budget')
+    else:
+        form = BudgetForm()
+
+    existing_budget = Budget.objects.all()
+
+    return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
+
+
+
 
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
@@ -144,3 +159,9 @@ def contact_form_submit(request):
         form = ContactForm()
 
     return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
+
+def delete_financial_account(request, id):
+    model = FinancialAccount
+    to_delete = model.objects.get(id=id)
+    to_delete.delete()
+    return redirect('/user-account')
