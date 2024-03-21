@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
-from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm
+from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
-from .models import FinancialAccount, UserProfile, ContactMessage
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
 #import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
@@ -19,6 +19,8 @@ from django.core.files.base import ContentFile
 from django.shortcuts import render
 import plotly.graph_objs as go
 from .models import Expense
+
+from .models import Expense, FinancialAccount
 
 
 
@@ -89,12 +91,9 @@ def about(request):
 
 @login_required
 def userAccountPage(request):
-    try:
-        userProfile =  UserProfile.objects.get(user = request.user)
-        bank_accounts = FinancialAccount.objects.filter(username = userProfile)
-    except ():
-        print("User not logged in")
 
+    userProfile =  UserProfile.objects.get(user = request.user)
+    bank_accounts = FinancialAccount.objects.filter(username = userProfile)
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
 def financialAccount(request, account_slug):
@@ -113,14 +112,9 @@ def newAccount(request):
         form = FinancialAccountForm(request.POST, request.FILES)
         if form.is_valid():
             userProfile =  UserProfile.objects.get(user = request.user)
-            num_existing_accounts = FinancialAccount.objects.filter(username=userProfile).count()
-            if num_existing_accounts >= MAX_ACCOUNTS_PER_USER:
-                # If the maximum limit is reached, display an error message
-                messages.error(request, f"You can only have a maximum of {MAX_ACCOUNTS_PER_USER} accounts.")
-                return redirect(reverse('userAccountPage'))
-            else:
-                form.save(userProfile)
-                return redirect(reverse('userAccountPage'))
+            form.save(userProfile)
+            print("THE UCK??")
+            return redirect(reverse('userAccountPage'))
         else:
             print(form.errors)
             messages.error(request, "There was a problem creating a new account. Please try again.")
@@ -129,7 +123,20 @@ def newAccount(request):
     return render(request, 'newAccount.html', {"form":form})
 
 def budget(request):
-    return render(request, 'budget.html')
+    if request.method == 'POST':
+        form = BudgetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('budget')
+    else:
+        form = BudgetForm()
+
+    existing_budget = Budget.objects.all()
+
+    return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
+
+
+
 
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
@@ -151,4 +158,10 @@ def contact_form_submit(request):
     else:
         form = ContactForm()
 
-    return render(request, 'ContactUs.html', {'form': form})  
+    return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
+
+def delete_financial_account(request, id):
+    model = FinancialAccount
+    to_delete = model.objects.get(id=id)
+    to_delete.delete()
+    return redirect('/user-account')
