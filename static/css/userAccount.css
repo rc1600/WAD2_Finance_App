@@ -11,8 +11,8 @@
 
 .images {
 
-    height: 1000px;
-    width: 1000px;
+    height: 100px;
+    width: auto;
     display: inline-block;
 }
 
@@ -31,4 +31,8 @@
 img {
     border-radius: 20px;
     display: inline-block;
+}
+
+div {
+    background-color: brown;
 }
