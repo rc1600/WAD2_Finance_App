@@ -83,6 +83,12 @@ button {
     
 }
 
+.contact_message {
+    display: block;
+
+    border-radius: 10px;
+}
+
 .input_button {
     margin-top:20px;
     margin-bottom: 15px;

@@ -72,7 +72,5 @@ class ExpenseForm(forms.ModelForm):
         exclude = ['financial_account']    
 
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Your Name'}))
-    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Your Email'}))
-    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message: max length 150 characters', 'cols': 50, 'maxlength': 150, 'class':'contact_message'}))
 
