@@ -200,6 +200,13 @@ i {
 
 img {
     border-radius: 20px;
+
+}
+
+.account-section img {
+    height: 300px;
+    width: 400px;
+    display: inline-block;
 }
 
 a, a:hover, a:visited, a:active {
