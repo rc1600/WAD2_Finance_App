@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
-from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm
+from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
@@ -18,13 +18,10 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
 import plotly.graph_objs as go
-<<<<<<< HEAD
-from .forms import BudgetForm
-=======
 from .models import Expense
 
 from .models import Expense, FinancialAccount
->>>>>>> 9ceac3f1a36ad24892a9f8dab2c0bd7fa27aff2f
+
 
 
 def signup_view(request):
