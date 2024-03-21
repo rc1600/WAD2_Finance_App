@@ -41,12 +41,18 @@ def home_view(request):
     return render(request, 'home.html')
     
 
-def login_view(request):  # Use this function as the login view
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            auth_login(request, form.get_user())  # Use the aliased auth_login
-            return redirect(reverse('userAccountPage'))
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('userAccountPage')  
+            else:
+                form.add_error(None, "Username or password is incorrect")
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
