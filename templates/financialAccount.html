@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %}Financial Account{% endblock %}
+{% block title_block %}
+    {% if financial_account %}
+        {{ financial_account.name }}
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
 
 {% block body_block %}
-    <h1>Financial Account</h1>
+{% if financial_account %}
+<h1>{{ financial_account.name }}</h1>
+{% endif %}
     <ul>
         <li><a href="{% url 'budget' %}">Budget</a></li>
         <li><a href="{% url 'incomeOutcome' %}">Income/Outcome</a></li>
