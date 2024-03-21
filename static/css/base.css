@@ -46,6 +46,23 @@ section {
     
 }
 
+.user_account_div {
+
+    width: 100%;
+    text-align: center;
+
+}
+
+.user_account_div_child {
+    display:inline-block;
+    width:300px;
+}
+
+.user_account_div_child:not(:last-child) {
+    border-right: 1.5px solid #FFFF;
+    bor /* Adjust the color and thickness as needed */
+}
+
 hr {
     width: 1200px;
 }
@@ -81,6 +98,12 @@ button {
     border-radius: 5px;
     border-style: solid;
     
+}
+
+.contact_message {
+    display: block;
+
+    border-radius: 10px;
 }
 
 .input_button {
@@ -178,8 +201,6 @@ p {
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-
-    width: 500px;
 }
 
 .center {
@@ -192,6 +213,10 @@ i {
     padding:6px;
 }
 
+.about_text {
+    width: 500px;
+}
+
 .home_img {
     height:250px;
     width:460px;
@@ -200,7 +225,15 @@ i {
 
 img {
     border-radius: 20px;
+
 }
+
+.user_account_images {
+    height: 300px;
+    width: 250px;
+    margin: 10px;
+}
+
 
 a, a:hover, a:visited, a:active {
     color:inherit;

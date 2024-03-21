@@ -81,8 +81,6 @@ class Expense(models.Model):
     price = models.FloatField(validators=[MinValueValidator(0)])
         
 class ContactMessage(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
     message = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 

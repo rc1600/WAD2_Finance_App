@@ -6,8 +6,33 @@
 /* Additional styles for userAccount page */
 .account-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
-.account-item {
-    margin-right: 20px;
+.images {
+
+    height: 100px;
+    width: auto;
+    display: inline-block;
+}
+
+.account-section {
+    flex-basis: 25%;
+    padding: 5px;
+    display: inline-block;
+}
+
+.account-section img {
+    height: 300px;
+    width: 400px;
+    display: inline-block;
+}
+
+img {
+    border-radius: 20px;
+    display: inline-block;
+}
+
+div {
+    background-color: brown;
 }

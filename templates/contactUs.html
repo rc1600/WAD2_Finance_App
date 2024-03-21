@@ -8,13 +8,7 @@ Contact Us - Finance Manager
 
 {% block body_block %}
 
-<ul> 
-    {% if account_slug %}
-        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-    {% else %}
-        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-    {% endif %}
-</ul>
+
 
 <main class="center">
     <section>
@@ -23,10 +17,10 @@ Contact Us - Finance Manager
     </section>
     <hr>
     <section class="login center">
-        <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form">
+        <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form ">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="input_button">Send Message</button>
+            {{ form.message }}
+            <button type="submit" class="input_button center">Send Message</button>
         </form>
         
     </section>

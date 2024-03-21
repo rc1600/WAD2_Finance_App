@@ -1,32 +1,55 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<head></head>
+
 {% block title_block %}
     User Account Page
 {% endblock %}
 
-{% block head_block %}
-    <link rel="stylesheet" href="{% static 'css/userAccount.css' %}">
-{% endblock %}
 
 {% block body_block %}
     <h1>Welcome</h1>
-    <div class="account-container">
-        <h2>Savings Account</h2>
-        {% if bank_accounts %}
-            {% for bank_account in bank_accounts %}
-                <div class="account-item">
-                    <a href="{% url 'financial_account' bank_account.slug %}">
-                        <p>{{ bank_account.financial_account_name }}</p>
-                        <img src="{{ MEDIA_URL }}{{ bank_account.picture }}" alt="this isn't loading">
-                    </a>
+        <div class="user_account_div" >
+            {% if bank_accounts %}
+                {% for bank_account in bank_accounts %}
+                    <div class = "user_account_div_child">
+                        <h2>{{ bank_account.financial_account_name }}</p>
+                        <section>
+                            <a href="{% url 'financial_account' bank_account.slug %}">
+                                <img src="{{ MEDIA_URL }}{{ bank_account.picture }}" alt="this isn't loading" class = "user_account_images" >
+                            </a>
+                        </section>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% if bank_accounts|length < 3 %}
+                <div class="account-section" >
+                    <h2>Add New Account</h2>
+                    <div class="account-item">
+                        <a href="{% url 'newAccount' %}">
+                            <img src="{% static 'images/addNewAccount.jpg' %}" alt="add new account" class="user_account_images" >
+                        </a>
+                    </div>
                 </div>
-            {% endfor %}
-        {% endif %}
-        <div class="account-item">
-            <a href="{% url 'newAccount' %}">
-                <img src="{% static 'images/PieChart.jpg' %}" alt="">
-            </a>
+            {% endif %}
         </div>
-    </div>
+        <!--
+        <div class="account-section">
+            <h2>Savings Account</h2>
+            <div class="account-item">
+                <a href="{% url 'newAccount' %}">
+                    <img src="{% static 'images/PieChart.jpg' %}" alt="" class="images">
+                </a>
+            </div>
+        </div>
+        <div class="account-section">
+            <h2>Current Account</h2>
+            <div class="account-item">
+                <a href="{% url 'newAccount' %}">
+                    <img src="{% static 'images/currentAccount.jpg' %}" alt="">
+                </a>
+            </div>
+        </div>
+        -->
 {% endblock %}
