@@ -1,4 +1,48 @@
-{% extends 'base.html' %}   
+{% extends 'base.html' %}
+{% load static %}
+
 {% block title_block %}
     Home - Finance Manager
+{% endblock %}
+
+{% block body_block %}
+    <header>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'analysis' %}">Analysis</a></li>
+                    <li><a href="{% url 'home' %}">Back to Home</a></li>
+                    
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="center">
+            <h4>The <i>first</i> money management system that gives <i>you</i> control</h4>
+        </section>
+        <hr>
+        <section>
+            <img src="{% static 'images/StockMarket.jpg' %}" alt="img1" class="home_img">
+            <img src="{% static 'images/PieChart.jpg' %}" alt="img2" class="home_img">
+        </section>
+        <section class="center">
+            <form method="post" id="budget-form">
+                {% csrf_token %}
+                <div class="form-field">
+                    <label for="id_date">Date:</label>
+                    {{ form.date }}
+                </div>
+                <div class="form-field">
+                    <label for="id_category">Category:</label>
+                    {{ form.category }}
+                </div>
+                <div class="form-field">
+                    <label for="id_amount">Amount:</label>
+                    {{ form.amount }}
+                </div>
+                <button type="submit" class="input_button">Submit</button>
+            </form>
+        </section>
+    </main>
 {% endblock %}
