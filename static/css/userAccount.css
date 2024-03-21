@@ -1,0 +1,13 @@
+/* userAccount.css */
+
+/* Import styles from base.css */
+@import url('base.css');
+
+/* Additional styles for userAccount page */
+.account-container {
+    display: flex;
+}
+
+.account-item {
+    margin-right: 20px;
+}
