@@ -17,7 +17,7 @@ import io
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render
-from .models import Expense
+from .models import Expense, FinancialAccount
 
 
 def signup_view(request):
@@ -124,4 +124,10 @@ def contact_form_submit(request):
     else:
         form = ContactForm()
 
-    return render(request, 'ContactUs.html', {'form': form})  
+    return render(request, 'ContactUs.html', {'form': form}) 
+
+def delete_financial_account(request, id):
+    model = FinancialAccount
+    to_delete = model.objects.get(id=id)
+    to_delete.delete()
+    return redirect('/user-account')
