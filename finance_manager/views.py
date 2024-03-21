@@ -77,6 +77,7 @@ def about(request):
 
 @login_required
 def userAccountPage(request):
+
     userProfile =  UserProfile.objects.get(user = request.user)
     bank_accounts = FinancialAccount.objects.filter(username = userProfile)
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
@@ -95,7 +96,8 @@ def newAccount(request):
         if form.is_valid():
             userProfile =  UserProfile.objects.get(user = request.user)
             form.save(userProfile)
-            redirect(reverse('userAccountPage'))
+            print("THE UCK??")
+            return redirect(reverse('userAccountPage'))
         else:
             print(form.errors)
             messages.error(request, "There was a problem creating a new account. Please try again.")
@@ -129,4 +131,4 @@ def contact_form_submit(request):
     else:
         form = ContactForm()
 
-    return render(request, 'ContactUs.html', {'form': form})  
+    return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
