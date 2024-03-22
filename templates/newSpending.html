@@ -1,4 +1,30 @@
-{% extends 'base.html' %}   
+{% extends 'base.html' %}
+{% load static %}
+
 {% block title_block %}
-    Home - Finance Manager
+New spending
+{% endblock %}
+{% block body_block %}
+Here you can add any new spending that you have made to be able to better keep track of your finances.
+
+<section class="center">
+    <h2>Add New Spending</h2>
+    <form method="post" class="login center">
+        {% csrf_token %}
+        {{ form.name }}
+        {{ form.category }}
+        {{ form.amount }}
+        <button type="submit" class="center input_button">Submit</button>
+    </form>
+</section>
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
 {% endblock %}

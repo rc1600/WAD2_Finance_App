@@ -4,11 +4,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
-from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm
+from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
 import os
-from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense, NewSpending
 #import matplotlib.pyplot as plt
 from django.conf import settings
 from django.templatetags.static import static
@@ -76,7 +76,18 @@ def contactUs(request):
     return render(request, 'contactUs.html')
 
 def newSpending(request):
-    return render(request, 'newSpending.html')
+    if request.method == 'POST':
+        form = NewSpendingForm(request.POST, request.FILES)
+        if form.is_valid():
+            userProfile =  UserProfile.objects.get(user = request.user)
+            form.save(userProfile)
+            return redirect(reverse('incomeOutcome'))
+        else:
+            print(form.errors)
+            messages.error(request, "There was a problem adding your spending. Please try again.")
+    else:
+        form = NewSpendingForm()  # If not a post request, create an empty form
+    return render(request, 'newSpending.html', {"form" : form})
 
 def incomeOutcome(request):
     if request.method == 'POST':
