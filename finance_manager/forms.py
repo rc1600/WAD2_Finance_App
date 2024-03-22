@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.models import User  
 from django.contrib.auth.forms import UserCreationForm  
 from django.core.exceptions import ValidationError  
-from .models import UserProfile, Income, Expense, FinancialAccount, Budget
+from .models import UserProfile, Income, Expense, FinancialAccount, Budget, NewSpending
+from finance_manager.categories import CATEGORIES
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, label='Email', widget=forms.TextInput(attrs={'placeholder': 'Enter your email', 'class':'inputs'}))
@@ -83,4 +84,17 @@ class ExpenseForm(forms.ModelForm):
 
 class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Your Message: max length 150 characters', 'cols': 50, 'maxlength': 150, 'class':'contact_message'}))
+    
+class NewSpendingForm(forms.ModelForm):
+    name = forms.CharField(required=True, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Name: ', 'class':'inputs'}))
+    category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholder': 'Category: ', 'class': 'inputs'}))
+    amount = forms.DecimalField(required=True, max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'placeholder': 'Spending amount: ', 'class':'inputs'}))
+
+    
+    #amount = forms.IntegerField()
+    #category = forms.ChoiceField(choices=CATEGORIES)
+    
+    class Meta:
+        model = NewSpending
+        fields = ['financial_account', 'category']
 
