@@ -12,8 +12,6 @@ Income / Spending Page
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <button><a href="{% url 'budget' %}">Budget</a></button>
-                        <button><a href="{% url 'analysis' %}">Analysis</a></button>
                         <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
                 </ul>

@@ -119,17 +119,17 @@ def newAccount(request):
 
 def budget(request, account_slug):
     if request.method == 'POST':
+        account = getAccount(request, account_slug)
         form = BudgetForm(request.POST)
         if form.is_valid():
-            account = getAccount(request, account_slug)
             form.save(account)
-            return redirect('budget')
+            return redirect(reverse('incomeOutcome', kwargs={'account_slug':account_slug}))
     else:
         form = BudgetForm()
 
     existing_budget = Budget.objects.all()
 
-    return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
+    return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget, 'account_slug':account_slug})
 
 def incomeOutcome(request, account_slug):
     if request.method == 'POST':
@@ -157,10 +157,10 @@ def contact_form_submit(request):
 
     return render(request, 'ContactUs.html', {'form': form})
 
-def deleteBudget(request, id):
+def deleteBudget(request, id, account_slug):
     to_delete = Budget.objects.get(id=id)
     to_delete.delete()
-    return redirect('budget')
+    return redirect(reverse('budget', kwargs={'account_slug':account_slug}))
 
 def deleteFinancialAccount(request, account_slug):
     account = getAccount(request, account_slug)

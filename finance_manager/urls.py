@@ -40,7 +40,7 @@ urlpatterns = [
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('contact/', views.contact_form_submit, name='contact_form_submit'),
-    path('budget/delete-budget/<int:id>', views.deleteBudget, name='delete-budget'),
+    path('budget/delete-budget/<int:id>/<slug:account_slug>/', views.deleteBudget, name='delete_budget'),
     path('financial-account/<slug:account_slug>/delete-financial-account/', views.deleteFinancialAccount, name='delete_financial_account'),
     ]
 

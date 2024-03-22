@@ -57,9 +57,6 @@ class Budget(models.Model):
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
     amount = models.FloatField(validators=[MinValueValidator(0)])
 
-    class Meta:
-        unique_together = ('date', 'financial_account', 'category')
-
     def save(self, *args, **kwargs):
         super(Budget, self).save(*args,**kwargs)
 
