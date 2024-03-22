@@ -60,7 +60,7 @@ section {
 
 .user_account_div_child:not(:last-child) {
     border-right: 1.5px solid #FFFF;
-     /* Adjust the color and thickness as needed */
+    bor /* Adjust the color and thickness as needed */
 }
 
 hr {
