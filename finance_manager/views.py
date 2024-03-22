@@ -50,6 +50,8 @@ def login_view(request):
 def analysis_view(request, account_slug):
     account = getAccount(request, account_slug)
     expenses = Expense.objects.filter(financial_account = account)
+    if len(expenses) == 0:
+        return render(request, 'analysis.html', {'plot_div': "THERE ARE NO EXPENSES CURRENTLY"})
     labels = [expense.category for expense in expenses]
     values = [expense.price for expense in expenses]
 
