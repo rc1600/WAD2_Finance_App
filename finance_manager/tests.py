@@ -1,11 +1,7 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
-from finance_manager.models import FinancialAccount, UserProfile, Budget, Expense
-from finance_manager.forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
+from finance_manager.models import FinancialAccount, UserProfile
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.core.files.uploadedfile import SimpleUploadedFile
-
 
 class SignUpTestCase(TestCase):
     def test_signup(self):
