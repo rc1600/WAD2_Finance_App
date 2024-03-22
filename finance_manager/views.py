@@ -7,21 +7,10 @@ from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login  # Alias the login function
-import os
-from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense, NewSpending
-#import matplotlib.pyplot as plt
-from django.conf import settings
-from django.templatetags.static import static
-from django.shortcuts import HttpResponse
-import io
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from django.shortcuts import render, get_object_or_404
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
+from django.shortcuts import render
 import plotly.graph_objs as go
-from .models import Expense
-
-from .models import Expense, FinancialAccount
-
+from .models import ContactMessage
 
 
 def signup_view(request):
@@ -145,13 +134,8 @@ def budget(request):
 
     return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
 
-
-
-
 def incomeOutcome(request):
     return render(request, 'incomeOutcome.html')
-
-from .models import ContactMessage
 
 def contact_form_submit(request):
     if request.method == 'POST':

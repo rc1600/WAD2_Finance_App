@@ -16,6 +16,7 @@
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
+                        <button><a href="{% url 'incomeOutcome' %}">Income and Expenses</a></button>
                         <button><a href="{% url 'analysis' %}">Analysis</a></button>
                         <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
@@ -28,50 +29,50 @@
             <img src="{% static 'images/budget_1.jpg' %}" alt="Budget Checklist" class="home_img">
             <img src="{% static 'images/budget_2.jpg' %}" alt="Budget Manager" class="home_img">
         </div>
-        {% if existing_budget %}
+        <div>
+            {% if existing_budget %}
+                <section>
+                    <h2>Existing Budget:</h2>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Month</th>
+                                <th>Category</th>
+                                <th>Amount (GBP)</th>
+                                <th>Delete Record</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for budget in existing_budget %}
+                            <tr>
+                                <td>{{ budget.date.year }}</td>
+                                <td>{{ budget.date.month }}</td>
+                                <td>{{ budget.category }}</td>
+                                <td>{{ budget.amount }}£</td>
+                                <td><a href="delete-budget/{{ budget.id }}">delete</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+            {% endif %}
             <section>
-                <h2>Existing Budget:</h2>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Year</th>
-                            <th>Month</th>
-                            <th>Category</th>
-                            <th>Amount (GBP)</th>
-                            <th>Delete Record</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for budget in existing_budget %}
-                        <tr>
-                            <td>{{ budget.date.year }}</td>
-                            <td>{{ budget.date.month }}</td>
-                            <td>{{ budget.category }}</td>
-                            <td>{{ budget.amount }}£</td>
-                            <td><a href="delete-budget/{{ budget.id }}">delete</a></td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <form method="post" id="budget-form">
+                    {% csrf_token %}
+                    <div class="form-field">
+                        <label for="id_date">Date:</label>
+                        {{ form.date }}
+                    
+                        <label for="id_category">Category:</label>
+                        {{ form.category }}
+                    
+                        <label for="id_amount">Amount:</label>
+                        {{ form.amount }}
+                    </div>
+                    <button type="submit" class="input_button">Submit</button>
+                </form>
             </section>
-        {% endif %}
-        <section>
-            <form method="post" id="budget-form">
-                {% csrf_token %}
-                <div class="form-field">
-                    <label for="id_date">Date:</label>
-                    {{ form.date }}
-                </div>
-                <div class="form-field">
-                    <label for="id_category">Category:</label>
-                    {{ form.category }}
-                </div>
-                <div class="form-field">
-                    <label for="id_amount">Amount:</label>
-                    {{ form.amount }}
-                </div>
-                <button type="submit" class="input_button">Submit</button>
-            </form>
-        </section>
+        </div>
     </div>
 {% endblock %}

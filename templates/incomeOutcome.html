@@ -7,6 +7,36 @@ Income / Spending Page
 
 {% block body_block %}
     <div class='center'>
+        <h4>Income and Expenses Manager</h4>
+        <header class="header-center">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <button><a href="{% url 'budget' %}">Budget</a></button>
+                        <button><a href="{% url 'analysis' %}">Analysis</a></button>
+                        <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <hr></hr>
+
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
+
+{% endblock %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title_block %}
+Income / Spending Page
+{% endblock %}
+
+{% block body_block %}
+    <div class='center'>
         <header class="header-center">
             <nav>
                 <ul>
