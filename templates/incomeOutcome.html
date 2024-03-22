@@ -7,20 +7,20 @@ Income / Spending Page
 
 {% block body_block %}
     <div class='center'>
+        <h4>Income and Expenses Manager</h4>
         <header class="header-center">
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
-                        <li><a href="{% url 'home' %}">Back to Home</a></li>
+                        <button><a href="{% url 'budget' %}">Budget</a></button>
+                        <button><a href="{% url 'analysis' %}">Analysis</a></button>
+                        <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
                 </ul>
             </nav>
         </header>
     </div>
-
-    {% if %}
-
+    <hr></hr>
 
 <form method="post" action="{% url 'newSpending' %}">
     {% csrf_token %}
