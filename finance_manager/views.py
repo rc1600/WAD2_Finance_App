@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login as auth_login  # Alias the login function
+from django.contrib.auth import login  # Alias the login function
 from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
 from django.shortcuts import render
 import plotly.graph_objs as go
