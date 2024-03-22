@@ -52,7 +52,7 @@
                                 <td>{{ budget.date.month }}</td>
                                 <td>{{ budget.category }}</td>
                                 <td>{{ budget.amount }}£</td>
-                                <td><button onclick="confirmDeletion(event, 'Are you sure you want to delete this budget? This action cannot be undone.')"><a href="{% url 'delete_budget' budget.id account_slug%}">Delete</button></td>
+                                <td><button onclick="confirmDeletion(event, 'Are you sure you want to delete this budget? This action cannot be undone.')"><a href="{% url 'delete_budget' budget.id account_slug %}">Delete</button></td>
                             </tr>
                         {% endfor %}
                         </tbody>

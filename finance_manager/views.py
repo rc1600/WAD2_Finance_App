@@ -118,16 +118,16 @@ def newAccount(request):
     return render(request, 'newAccount.html', {"form":form})
 
 def budget(request, account_slug):
+    account = getAccount(request, account_slug)
     if request.method == 'POST':
-        account = getAccount(request, account_slug)
         form = BudgetForm(request.POST)
         if form.is_valid():
             form.save(account)
-            return redirect(reverse('incomeOutcome', kwargs={'account_slug':account_slug}))
+            return redirect(reverse('budget', kwargs={'account_slug':account_slug}))
     else:
         form = BudgetForm()
 
-    existing_budget = Budget.objects.all()
+    existing_budget = Budget.objects.filter(financial_account = account)
 
     return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget, 'account_slug':account_slug})
 
