@@ -11,17 +11,18 @@
 
 {% block body_block %}
     <div class="center">
+        <h4>Budget Manager</h4>
         <header class="header-center">
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
-                        <li><a href="{% url 'home' %}">Back to Home</a></li>
+                        <button><a href="{% url 'analysis' %}">Analysis</a></button>
+                        <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
                 </ul>
             </nav>
         </header>
-        <h4>Budget Manager</h4>
+        
         <hr>
         <div class="images-section">
             <img src="{% static 'images/budget_1.jpg' %}" alt="Budget Checklist" class="home_img">
@@ -30,11 +31,28 @@
         {% if existing_budget %}
             <section>
                 <h2>Existing Budget:</h2>
-                <ul>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Month</th>
+                            <th>Category</th>
+                            <th>Amount (GBP)</th>
+                            <th>Delete Record</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for budget in existing_budget %}
-                        <li>{{ budget.date }} - Category: {{ budget.category }}, Amount: {{ budget.amount }}</li>
+                        <tr>
+                            <td>{{ budget.date.year }}</td>
+                            <td>{{ budget.date.month }}</td>
+                            <td>{{ budget.category }}</td>
+                            <td>{{ budget.amount }}£</td>
+                            <td><a href="delete-budget/{{ budget.id }}">delete</a></td>
+                        </tr>
                     {% endfor %}
-                </ul>
+                    </tbody>
+                </table>
             </section>
         {% endif %}
         <section>
@@ -55,6 +73,5 @@
                 <button type="submit" class="input_button">Submit</button>
             </form>
         </section>
-    </main>
     </div>
 {% endblock %}

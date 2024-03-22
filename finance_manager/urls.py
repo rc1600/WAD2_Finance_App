@@ -43,7 +43,8 @@ urlpatterns = [
     path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),  
     path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
     path('contact/', views.contact_form_submit, name='contact_form_submit'),
-    path('delete/', views.delete_financial_account, name='delete_financial_account'),
+    path('budget/delete-budget/<int:id>', views.deleteBudget, name='delete-budget'),
+    path('financial-account/<slug:account-slug>/delete-financial-account/<int:financial_account_id>', views.deleteFinancialAccount, name='delete_financial_account'),
     ]
 
 if settings.DEBUG:

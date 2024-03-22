@@ -16,7 +16,7 @@ from django.shortcuts import HttpResponse
 import io
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import plotly.graph_objs as go
 from .models import Expense
 
@@ -170,8 +170,12 @@ def contact_form_submit(request):
 
     return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
 
-def delete_financial_account(request, id):
-    model = FinancialAccount
-    to_delete = model.objects.get(id=id)
+def deleteBudget(request, id):
+    to_delete = Budget.objects.get(id=id)
     to_delete.delete()
-    return redirect('/user-account')
+    return redirect('budget')
+
+def deleteFinancialAccount(request, account_slug, financial_account_id):
+    to_delete = FinancialAccount.objects.get(financial_account_id=financial_account_id)
+    to_delete.delete()
+    return redirect('userAccountPage')

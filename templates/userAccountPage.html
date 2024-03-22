@@ -9,7 +9,7 @@
 
 
 {% block body_block %}
-    <h1>Welcome</h1>
+    <h2>Welcome, <b>{{ user.username }}</b></h2>
         <div class="user_account_div" >
             {% if bank_accounts %}
                 {% for bank_account in bank_accounts %}

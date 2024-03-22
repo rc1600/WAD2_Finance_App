@@ -12,16 +12,21 @@
     <header>
         <nav>
             <ul>
+                {% if user.is_authenticated%}
                     {% if user.is_superuser %}
-                        <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                        <button><a href="{% url 'admin:index' %}">To Admin Page</a></button>
                     {% endif %}
+                    <button><a href="{% url 'userAccountPage' %}">To Your Page</a></button>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <main>
         <section class = "center">
             <h4>The <i>first </i> money management system that gives <i> you </i> control</h4>
-            <button><a href="{% url 'signup' %}">Sign Up</a></button>
+            <button><a href="{% url 'signup' %}">Create New Account</a></button>
+            {% if user.is_authenticated%}
+            {% endif %}
         </section>
         <hr>
         <section>

@@ -4,7 +4,23 @@
 {% block title_block %}
 Income / Spending Page
 {% endblock %}
+
 {% block body_block %}
+    <div class='center'>
+        <header class="header-center">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
+                        <li><a href="{% url 'home' %}">Back to Home</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    {% if %}
+
 
 <form method="post" action="{% url 'newSpending' %}">
     {% csrf_token %}

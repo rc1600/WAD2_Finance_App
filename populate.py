@@ -57,8 +57,8 @@ def populate():
                     {'date':datetime(2024,2,7).date(),'category':INTERNET,'product_name':'VOXI Plan','price':12.00},
                     ]
     
-    #date = datetime.now()
-    #month = date.year
+    #date = datetime.date()
+    #month = date.month
     
     # Insert For-Loop for data insertion
     for data in user_profile_list:
