@@ -100,7 +100,9 @@ button:hover {
     background-color: #a76cbf; 
 }
 
-
+.delete_user {
+    background-color: red;
+}
 
 
 
