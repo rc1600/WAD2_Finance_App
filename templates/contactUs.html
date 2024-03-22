@@ -10,19 +10,7 @@ Contact Us - Finance Manager
 <main class="center">
     <h4>Contact Finance Manager Developers</h4>
     <p>We're here to provide feedback and answer any question you might have. We look forward to hearing from you.</p>
-    <header class="header-center">
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                    <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
-                {% else %}
-                    <button><a href="{% url 'home' %}">Back to home</a></button>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
 
-    <hr>
     <section class="login center">
         <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form ">
             {% csrf_token %}
