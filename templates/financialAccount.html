@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_js %}
+<script src="{% static 'js/confirmDelete.js' %}"></script>
+{% endblock %}
+
 {% block title_block %}
     {% if financial_account %}
         {{ financial_account.name }}
@@ -11,7 +15,7 @@
 
 {% block body_block %}
 {% if financial_account %}
-<h1>{{ financial_account}}</h1>
+<h1>{{ financial_account.name }}</h1>
 {% endif %}
     <div class="user_account_div">
             <section class="user_account_div_child">
@@ -37,4 +41,5 @@
         </p>
     </section>
 {% endblock %}
+
 
