@@ -12,13 +12,8 @@ Here you can add any new spending that you have made to be able to better keep t
     <h2>Add New Spending</h2>
     <form method="post" class="login center">
         {% csrf_token %}
-        Product Name:<br>
         {{ form.name }}
-        <br><br>
-        Category:<br>
         {{ form.category }}
-        <br><br>
-        Amount:<br>
         {{ form.amount }}
         {{ form.financial_account }}
         <button type="submit" class="center input_button">Submit</button>

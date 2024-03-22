@@ -71,9 +71,8 @@ class BudgetForm(forms.ModelForm):
     
     class Meta:
         model = Budget
-        fields = '__all__'
-        #fields = ['date', 'category', 'amount']
-        #exclude = ['financial_account']
+        fields = ['date', 'category', 'amount']
+        exclude = ['financial_account']
         
 class IncomeForm(forms.ModelForm):
     class Meta:
