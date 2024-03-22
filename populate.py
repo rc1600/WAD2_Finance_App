@@ -20,8 +20,7 @@ def populate():
     
     user_profile_list = [{'username':'Bob', 'email':'bob@gmail.com', 'password':'Bob'},] #just one user profile
     
-    # fin_acc_dict = {<fin_acc_name>:{'financial_account_name': str, 'savings_balance': float
-    #                                   'current_balance': float},...}
+    # fin_acc_dict = {<fin_acc_name>:{'financial_account_name': str, 'balance': float,...}
     financial_account_list = [{'financial_account_name': 'Bob', 'balance':300},]
 
     # budget = [{'date':datetime(Y,M,D),'category':str,'amount':float},...]
@@ -77,10 +76,9 @@ def add_user_profile(data):
         user = User.objects.create(username=data['username'], email=data['email'], password=data['password'])
         UserProfile.objects.get_or_create(user=user)
 
-def add_fin_acc(username, financial_account_name, savings_balance, current_balance):
+def add_fin_acc(username, financial_account_name, balance):
     fin_acc = FinancialAccount.objects.get_or_create(username=username, financial_account_name=financial_account_name)[0]
-    fin_acc.savings_balance=savings_balance
-    fin_acc.current_balance=current_balance
+    fin_acc.balance=balance
     fin_acc.save()
     return fin_acc
 
