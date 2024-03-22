@@ -33,7 +33,8 @@ class FinancialAccount(models.Model):
     username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     financial_account_id = models.AutoField(primary_key=True)
     financial_account_name = models.CharField(max_length=NAME_MAX_LENGTH)
-    balance = models.FloatField(validators=[MinValueValidator(0)])
+    savings_balance = models.FloatField(validators=[MinValueValidator(0)])
+    current_balance = models.FloatField(validators=[MinValueValidator(0)])
     slug = models.SlugField(unique=True)
     picture = models.ImageField(upload_to=user_dir_path)
 

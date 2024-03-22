@@ -22,7 +22,8 @@ def populate():
     
     # fin_acc_dict = {<fin_acc_name>:{'financial_account_name': str, 'savings_balance': float
     #                                   'current_balance': float},...}
-    financial_account_list = [{'financial_account_name': 'Bob', 'balance':300},]
+    financial_account_list = [{'financial_account_name': 'Bob', 'savings_balance': 150,
+                                'current_balance': 100},]
 
     # budget = [{'date':datetime(Y,M,D),'category':str,'amount':float},...]
     budget_list = [{'date': datetime(2024,1,1).date(), 'category': RENT, 'amount': 500},
@@ -63,7 +64,7 @@ def populate():
     for data in user_profile_list:
         add_user_profile(data)
         for fin_acc in financial_account_list:
-            this_fin_acc = add_fin_acc(data['username'], fin_acc['financial_account_name'], fin_acc['balance'])
+            this_fin_acc = add_fin_acc(data['username'], fin_acc['financial_account_name'], fin_acc['savings_balance'], fin_acc['current_balance'])
             for budget in budget_list:
                 add_budget(this_fin_acc, budget['date'], budget['category'], budget['amount'])
             for income in income_list:

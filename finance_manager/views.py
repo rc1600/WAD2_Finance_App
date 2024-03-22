@@ -7,10 +7,10 @@ from django.contrib import messages  # Import messages
 from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login  # Alias the login function
-from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense, NewSpending
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
 from django.shortcuts import render
-from django.db.models import Sum
 import plotly.graph_objs as go
+from .models import ContactMessage
 
 
 def signup_view(request):
@@ -68,27 +68,21 @@ def newSpending(request):
     if request.method == 'POST':
         form = NewSpendingForm(request.POST, request.FILES)
         if form.is_valid():
-            user_profile = UserProfile.objects.get(user=request.user)
-            form.instance.financial_account = user_profile.financialaccount
-            form.save()
+            userProfile =  UserProfile.objects.get(user = request.user)
+            form.save(userProfile)
             return redirect(reverse('incomeOutcome'))
         else:
+            print(form.errors)
             messages.error(request, "There was a problem adding your spending. Please try again.")
     else:
-        form = NewSpendingForm()
-    return render(request, 'newSpending.html', {"form": form})
+        form = NewSpendingForm()  # If not a post request, create an empty form
+    return render(request, 'newSpending.html', {"form" : form})
 
 def incomeOutcome(request):
     if request.method == 'POST':
         return redirect('newSpending')
     else:
-        
-        user = request.user
-        bank_statements = NewSpending.objects.filter(financial_account__username=user.userprofile)
-        
-        total_amount = bank_statements.aggregate(total_amount=Sum('amount'))['total_amount'] or 0
-        
-        return render(request, "incomeOutcome.html", {'bank_statements':bank_statements})
+        return render(request, "incomeOutcome.html")
     
 def about(request):
     return render(request, 'aboutUs.html')

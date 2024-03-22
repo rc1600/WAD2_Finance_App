@@ -27,27 +27,26 @@ Income / Spending Page
     <button type="submit" class = "center input_button">Manually add spending</button>
 </form>
 
-{% endblock %}
-{% extends 'base.html' %}
-{% load static %}
+<hr></hr>
 
-{% block title_block %}
-Income / Spending Page
-{% endblock %}
+<div class="center">
+    <h4>Bank Statements</h4>
+    <ul>
+        {% for statement in bank_statements %}
+            <li>{{ statement.name }} - {{ statement.category }} - {{ statement.amount }}</li>
+            {% empty %}
+                <li>No bank statements found</li>
+            {% endfor %}
+    </ul>
+    <p>Total Amount: £{{ total_amount }}</p>
+</div>
 
-{% block body_block %}
-    <div class='center'>
-        <header class="header-center">
-            <nav>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
-                        <li><a href="{% url 'home' %}">Back to Home</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
-    </div>
+
+
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
 
 
 
@@ -57,4 +56,3 @@ Income / Spending Page
 </form>
 
 {% endblock %}
-

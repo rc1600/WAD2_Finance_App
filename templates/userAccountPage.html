@@ -24,10 +24,13 @@
                 {% endfor %}
             {% endif %}
             {% if bank_accounts|length < 3 %}
-                <div class="user_account_div_child " >
+                <div class="account-section" >
+                    <h2>Add New Account</h2>
+                    <div class="account-item">
                         <a href="{% url 'newAccount' %}">
-                            <button class="input_button">Add New Account</button>
+                            <img src="{% static 'images/addNewAccount.jpg' %}" alt="add new account" class="user_account_images" >
                         </a>
+                    </div>
                 </div>
             {% endif %}
         </div>

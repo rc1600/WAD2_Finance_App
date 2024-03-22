@@ -8,7 +8,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('user',)}
 
 class FinancialAccountAdmin(admin.ModelAdmin):
-    list_display = ('financial_account_name', 'username', 'financial_account_id', 'balance')
+    list_display = ('financial_account_name', 'username', 'financial_account_id', 'savings_balance', 'current_balance')
     prepopulated_fields = {'slug':('username','financial_account_name',)}
 
 class BudgetAdmin(admin.ModelAdmin):
