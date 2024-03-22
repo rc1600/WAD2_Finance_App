@@ -28,33 +28,31 @@ def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()  # Save the new user to the database
-            user = authenticate(username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password1'])
-            if user is not None and user.is_active:
-                login(request, user)  # Log the user in
-                return redirect(reverse('userAccountPage'))  # Redirect to home page
-            else:
-                # User might not be active, or authentication backend is not returning the user
-                messages.error(request, "Account created successfully, please verify your email before login.")
-        else:
-            print(form.errors)
-            messages.error(request, "There was a problem with the registration. Please try again.")
+            user = form.save()
+            login(request, user)
+            UserProfile.objects.create(user=user)  # Create UserProfile for the new user
+            return redirect('userAccountPage')
     else:
-        form = CustomUserCreationForm()  # If not a post request, create an empty form
-
+        form = CustomUserCreationForm()
+    
     return render(request, 'signup.html', {'form': form})
 
 def home_view(request):
     return render(request, 'home.html')
     
 
-def login_view(request):  # Use this function as the login view
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            auth_login(request, form.get_user())  # Use the aliased auth_login
-            return redirect(reverse('userAccountPage'))
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('userAccountPage')  
+            else:
+                form.add_error(None, "Username or password is incorrect")
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
