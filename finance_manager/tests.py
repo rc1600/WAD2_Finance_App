@@ -113,5 +113,3 @@ def test_budget_view(self):
     self.assertEqual(response.status_code, 200)  
     self.assertFormError(response, 'form', 'category', 'This field is required.')
     self.assertFormError(response, 'form', 'amount', 'Ensure this value is greater than or equal to 0.')
-
-

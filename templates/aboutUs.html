@@ -6,13 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-    <ul> 
-        {% if account_slug %}
-            <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-        {% else %}
-            <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-        {% endif %}
-    </ul>
+
     
     <section class='center'>
         <h2>Welcome to Finance Manager!</h2>
@@ -28,17 +22,19 @@
         <p>
             As a team of passionate students, we've dedicated countless hours to developing a robust platform that simplifies the complexities of personal finance. Our mission is to make financial management accessible to everyone, regardless of their background or experience level.
         </p>
+        <div class='div2'>
+            <section class='center'>
+                <p>
+                    Here's what sets us apart:
+                </p>
 
-        <p>
-            Here's what sets us apart:
-        </p>
-
-        <ul>
-            <li><strong>User-Centric Approach:</strong> We've designed our platform with you in mind. From the intuitive interface to the comprehensive features, every aspect of Financial Manager is tailored to meet your needs and exceed your expectations.</li>
-            <li><strong>Transparency and Trust:</strong> We prioritize transparency and trust in everything we do. Your privacy and security are our top priorities, and we take every measure to ensure that your financial information remains safe and secure.</li>
-            <li><strong>Continuous Improvement:</strong> We're committed to constant innovation and improvement. We actively seek feedback from our users, through our contact us page and incorporate their suggestions to enhance the user experience and add new features that address their evolving needs.</li>
-        </ul>
-
+                <ul>
+                    <li><strong>User-Centric Approach:</strong> We've designed our platform with you in mind. From the intuitive interface to the comprehensive features, every aspect of Financial Manager is tailored to meet your needs and exceed your expectations.</li>
+                    <li><strong>Transparency and Trust:</strong> We prioritize transparency and trust in everything we do. Your privacy and security are our top priorities, and we take every measure to ensure that your financial information remains safe and secure.</li>
+                    <li><strong>Continuous Improvement:</strong> We're committed to constant innovation and improvement. We actively seek feedback from our users, through our contact us page and incorporate their suggestions to enhance the user experience and add new features that address their evolving needs.</li>
+                </ul>
+            </section>
+        </div>
         <p>
             Join our platform and discover the benefits of Financial Manager. Take the first step towards financial freedom today!
         </p>
