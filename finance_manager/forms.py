@@ -89,7 +89,15 @@ class NewSpendingForm(forms.ModelForm):
     category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholder': 'Category: ', 'class': 'inputs'}))
     amount = forms.DecimalField(required=True, max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'placeholder': 'Spending amount: ', 'class':'inputs'}))
     
+    
     class Meta:
         model = NewSpending
-        fields = ['financial_account', 'category']
+        fields = ['name', 'category', 'amount']
 
+    def save(self, user=None, *args, **kwargs):
+        instance = super().save(commit=False)
+        if user:
+
+            instance.financial_account = user
+        instance.save()
+        return instance
