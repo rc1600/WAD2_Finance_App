@@ -49,15 +49,12 @@ class UserProfileForm(forms.ModelForm):
 class FinancialAccountForm(forms.ModelForm):
 
     financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
-    savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
-    current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
+    balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
     picture = forms.ImageField(required=True)
     
-    #what is the point of these balances
-
     class Meta:
         model = FinancialAccount
-        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance','picture']
+        fields = ['username', 'financial_account_name', 'balance','picture']
         exclude = ['username']
 
     def save(self, user, *args, **kwargs):
@@ -91,10 +88,16 @@ class ContactForm(forms.Form):
     
 class NewSpendingForm(forms.ModelForm):
     name = forms.CharField(required=True, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Name: ', 'class':'inputs'}))
-    category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholder': 'Category: ', 'class': 'inputs'}))
+    category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholdr': 'Category: ', 'class': 'inputs'}))
     amount = forms.DecimalField(required=True, max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'placeholder': 'Spending amount: ', 'class':'inputs'}))
     
     class Meta:
         model = NewSpending
-        fields = ['financial_account', 'category']
+        fields = ['name', 'category', 'amount']
 
+    def save(self, user=None, *args, **kwargs):
+        instance = super().save(commit=False)
+        if user:
+            instance.financial_account = user
+        instance.save()
+        return instance

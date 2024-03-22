@@ -2,7 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from finance_manager.categories import CATEGORIES
-from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
 import os
@@ -55,7 +54,7 @@ class Budget(models.Model):
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
     date = models.DateField()
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
-    amount = models.FloatField(validators=[MinValueValidator(0)]) # Amount of money budgeted for the category
+    amount = models.FloatField(validators=[MinValueValidator(0)])
 
     class Meta:
         unique_together = ('date', 'financial_account', 'category')
@@ -93,7 +92,7 @@ class NewSpending(models.Model):
         
     def save(self, user, *args, **kwargs):
         self.instance.financial_account = user
-        super(FinancialAccount, self).save(*args,**kwargs)
+        super(NewSpending, self).save(*args,**kwargs)
 
 
 class ContactMessage(models.Model):

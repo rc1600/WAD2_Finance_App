@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from finance_manager.models import FinancialAccount, UserProfile
 from django.contrib.auth.models import User
 from .models import UserProfile, FinancialAccount, Budget, Expense
 
@@ -19,6 +20,18 @@ class ViewsTestCase(TestCase):
 
     def test_analysis_view(self):
         response = self.client.get(reverse('analysis'))
+
+class SignUpTestCase(TestCase):
+    def test_signup(self):
+        signup_data = {
+            'username': 'testuser123',
+            'email': 'test@example.com',
+            'password1': 'testpassword123',
+            'password2': 'testpassword123'
+        }
+
+        response = self.client.post(reverse('signup'), signup_data, follow=True)
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'analysis.html')
 
@@ -31,6 +44,29 @@ class ViewsTestCase(TestCase):
         response = self.client.get(reverse('newSpending'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'newSpending.html')
+
+class FinancialAccountTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client.login(username='testuser', password='testpassword')
+        self.user_profile = UserProfile.objects.create(user=self.user)
+        self.financial_account = FinancialAccount.objects.create(
+            username=self.user_profile,
+            financial_account_name='Test Account',
+            balance=500,
+            slug='test-account'
+        )
+
+    def test_delete_financial_account(self):
+        url = reverse('delete_financial_account', kwargs={'account_slug': self.financial_account.slug, 'financial_account_id': self.financial_account.pk})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 302)  
+        self.assertFalse(FinancialAccount.objects.filter(pk=self.financial_account.pk).exists())
+
+def test_new_spending_view(self):
+    response = self.client.get(reverse('newSpending'))
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(response, 'newSpending.html')
 
     def test_incomeOutcome_view(self):
         response = self.client.get(reverse('incomeOutcome'))

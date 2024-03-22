@@ -11,7 +11,7 @@ nav ul {
     margin: 0;
     padding: 10px;
     list-style-type: none;
-    text-align: right; /* Align the links to the right */
+    text-align: right; 
 }
 
 nav ul li {
