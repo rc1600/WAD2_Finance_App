@@ -15,21 +15,26 @@
 {% endif %}
     <div class="user_account_div">
             <section class="user_account_div_child">
+                <h2>Budget</h2>
                 <a href="{% url 'budget' %}"><img src="{% static 'images/Budget.jpg'%}" alt="Budget" class = "user_account_images" ></a>
             </section>
             <section class="user_account_div_child">
+                <h2>Income and Expense</h2>
                 <a href="{% url 'incomeOutcome' %}"><img src="{% static 'images/incomeOutcome.jpg'%}" alt="Income/Outcome" class = "user_account_images" ></a>
             </section>
             <section class="user_account_div_child">
+                <h2>Analytics</h2>
                 <a href="{% url 'analysis' %}"><img src="{% static 'images/Analysis.jpg'%}" alt="Analysis" class = "user_account_images" ></a>
             </section>
         <br><br>
     </div>
-    <p>
-        <a href="delete-financial-account/{{ financial_account.financial_account_id }}">Delete Financial Account</a>
-    </p>
-    <p>
-        This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
-    </p>
+    <section class = "center">
+        <p>
+            <button><a href="{% url 'delete-financial-account' financial_account.financial_account_id financial_account.slug%}">Delete Financial Account</a></button>
+        </p>
+        <p>
+            This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
+        </p>
+    </section>
 {% endblock %}
 
