@@ -83,6 +83,22 @@ class Expense(models.Model):
     class Meta:
         unique_together = ('date', 'financial_account')
         
+class NewSpending(models.Model):
+    NAME_MAX_LENGTH = 128
+    
+    name = models.CharField(max_length =NAME_MAX_LENGTH)
+    financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
+    category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
+    amount = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('financial_account', 'category')
+        
+    def save(self, user, *args, **kwargs):
+        self.instance.financial_account = user
+        super(FinancialAccount, self).save(*args,**kwargs)
+
+
 class ContactMessage(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
