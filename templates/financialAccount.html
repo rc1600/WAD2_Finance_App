@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title_block %}
     {% if financial_account %}
@@ -10,12 +11,22 @@
 
 {% block body_block %}
 {% if financial_account %}
-<h1>{{ financial_account.name }}</h1>
+<h1>{{ financial_account}}</h1>
 {% endif %}
-    <ul>
-        <li><a href="{% url 'budget' %}">Budget</a></li>
-        <li><a href="{% url 'incomeOutcome' %}">Income/Outcome</a></li>
-        <li><a href="{% url 'analysis' %}">Analytics</a></li>
-    </ul>
+    <div class="user_account_div">
+            <section class="user_account_div_child">
+                <a href="{% url 'budget' %}"><img src="{% static 'images/Budget.jpg'%}" alt="Budget" class = "user_account_images" ></a>
+            </section>
+            <section class="user_account_div_child">
+                <a href="{% url 'incomeOutcome' %}"><img src="{% static 'images/incomeOutcome.jpg'%}" alt="Income/Outcome" class = "user_account_images" ></a>
+            </section>
+            <section class="user_account_div_child">
+                <a href="{% url 'analysis' %}"><img src="{% static 'images/Analysis.jpg'%}" alt="Analysis" class = "user_account_images" ></a>
+            </section>
+        <br><br>
+    </div>
+    <p></p>
+        This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
+    </p>
 {% endblock %}
 

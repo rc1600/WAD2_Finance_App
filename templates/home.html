@@ -10,8 +10,12 @@
         <nav>
             <ul>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'analysis' %}">Analysis</a></li>
-                     
+                        <li><a href="{% url 'analysis' %}">Analytics</a></li>
+                    {% if account_slug %}
+                        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+                    {% else %}
+                        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+                    {% endif %}
                     {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
@@ -30,7 +34,7 @@
             <img src="{% static 'images/PieChart.jpg' %}" alt="img2" class = "home_img">
         </section>
         <section class = 'center'>
-            <p>
+            <p class ="about_text">
                 Finance Manager is at the forefront of saving technology. Our idea came from one of our group members who is horribly addicted to gambling and needed a way of controlling his spending.
             </p>
         </section>

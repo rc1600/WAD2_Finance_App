@@ -58,7 +58,7 @@ class Budget(models.Model):
     amount = models.FloatField(validators=[MinValueValidator(0)]) # Amount of money budgeted for the category
 
     class Meta:
-        unique_together = ('date', 'financial_account')
+        unique_together = ('date', 'financial_account', 'category')
 
 class Income(models.Model):
     NAME_MAX_LENGTH = 128
@@ -69,7 +69,7 @@ class Income(models.Model):
     amount = models.FloatField(validators=[MinValueValidator(0)])
 
     class Meta:
-        unique_together = ('date', 'financial_account')
+        unique_together = ('date', 'financial_account', 'source')
 
 class Expense(models.Model):
     NAME_MAX_LENGTH = 128
@@ -79,9 +79,6 @@ class Expense(models.Model):
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
     product_name = models.CharField(max_length=NAME_MAX_LENGTH)
     price = models.FloatField(validators=[MinValueValidator(0)])
-
-    class Meta:
-        unique_together = ('date', 'financial_account')
         
 class NewSpending(models.Model):
     NAME_MAX_LENGTH = 128
@@ -100,8 +97,6 @@ class NewSpending(models.Model):
 
 
 class ContactMessage(models.Model):
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
     message = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 

@@ -1,8 +1,24 @@
 {% extends "base.html" %}
+{% load static %} 
+{% block title_block %}Analysis
 
-{% block title_block %}Analysis{% endblock %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
+{% endblock %}
 
 {% block body_block %}
+<ul> 
+    {% if account_slug %}
+        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+    {% else %}
+        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+    {% endif %}
+</ul>
 <div>
     <h1>Expense Analysis</h1>
     <div id="plot"></div>

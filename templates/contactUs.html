@@ -8,6 +8,8 @@ Contact Us - Finance Manager
 
 {% block body_block %}
 
+
+
 <main class="center">
     <section>
         <h2>Contact Finance Manager</h2>
@@ -15,10 +17,10 @@ Contact Us - Finance Manager
     </section>
     <hr>
     <section class="login center">
-        <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form">
+        <form action="{% url 'contact_form_submit' %}" method="post" class="contact-form ">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="input_button">Send Message</button>
+            {{ form.message }}
+            <button type="submit" class="input_button center">Send Message</button>
         </form>
         
     </section>
