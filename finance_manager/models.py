@@ -32,13 +32,15 @@ class FinancialAccount(models.Model):
     username = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     financial_account_id = models.AutoField(primary_key=True)
     financial_account_name = models.CharField(max_length=NAME_MAX_LENGTH)
-    balance = models.FloatField(validators=[MinValueValidator(0)])
+    savings_balance = models.FloatField(validators=[MinValueValidator(0)])
+    current_balance = models.FloatField(validators=[MinValueValidator(0)])
     slug = models.SlugField(unique=True)
     picture = models.ImageField(upload_to=user_dir_path)
 
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.financial_account_name)
+        self.current_balance = 0
         super(FinancialAccount, self).save(*args,**kwargs)
 
     class Meta:
@@ -53,7 +55,7 @@ class Budget(models.Model):
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
     date = models.DateField()
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
-    amount = models.FloatField(validators=[MinValueValidator(0)]) # Amount of money budgeted for the category
+    amount = models.FloatField(validators=[MinValueValidator(0)])
 
     class Meta:
         unique_together = ('date', 'financial_account', 'category')

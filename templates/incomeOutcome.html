@@ -20,11 +20,39 @@ Income / Spending Page
             </nav>
         </header>
     </div>
-    <hr>
+    <hr></hr>
 
-    <form method="post" action="{% url 'newSpending' %}">
-        {% csrf_token %}
-        <button type="submit" class = "center input_button">Manually add spending</button>
-    </form>
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
+
+<hr></hr>
+
+<div class="center">
+    <h4>Bank Statements</h4>
+    <ul>
+        {% for statement in bank_statements %}
+            <li>{{ statement.name }} - {{ statement.category }} - {{ statement.amount }}</li>
+            {% empty %}
+                <li>No bank statements found</li>
+            {% endfor %}
+    </ul>
+    <p>Total Amount: £{{ total_amount }}</p>
+</div>
+
+
+
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
+
+
+
+<form method="post" action="{% url 'newSpending' %}">
+    {% csrf_token %}
+    <button type="submit" class = "center input_button">Manually add spending</button>
+</form>
+
 {% endblock %}
-

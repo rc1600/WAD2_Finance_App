@@ -44,8 +44,8 @@ button {
 /* Log in */
 
 .login {
-    max-width: 600px; /* Responsive width */
-    min-height: 200px; /* Minimum height, grows with content */
+    max-width: 600px; 
+    min-height: 200px; 
     background-color: grey;
     border-radius: 10px;
     border: 1px solid #cd9c34;
@@ -83,14 +83,14 @@ button {
     border-width: 1px;
     border-color: #cd9c34; 
 
-    padding: 10px 15px; /* Adjust padding as necessary, it adds space inside the button */
+    padding: 10px 15px;
     background-color: #b892d8;
     border-radius: 10px; 
     color: #000000;
-    font-size: 16px; /* Adjust font-size as necessary */
+    font-size: 16px;
     text-align: center;
-    cursor: pointer; /* Changes cursor to pointer on hover */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 .input_button:hover {
@@ -151,7 +151,7 @@ h2 {
 }
 
 h4 {
-    /* The first money management system that gives you control */
+    
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -159,7 +159,7 @@ h4 {
 
     width: 700px;
 
-    /* or 42px */
+    
     text-align: center;
     color: #FFFF;
 }
@@ -225,7 +225,7 @@ a, a:hover, a:visited, a:active {
     text-decoration: none;
 }
 
-/* Error message styles */
+
 .errorlist {
     background-color: #D8000C;
     border: 1px solid #D8000C;
@@ -239,14 +239,14 @@ a, a:hover, a:visited, a:active {
     border: 1px solid #D8000C;
 }
 
-/* Form field styles */
+
 input,
 input:focus {
     outline: none;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
-    width: calc(100% - 16px); /* Adjusts width based on padding */
+    width: calc(100% - 16px); 
     margin-bottom: 10px;
     box-sizing: border-box;
 }

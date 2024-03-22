@@ -1,9 +1,5 @@
-/* userAccount.css */
-
-/* Import styles from base.css */
 @import url('base.css');
 
-/* Additional styles for userAccount page */
 .account-container {
     display: flex;
     flex-wrap: wrap;
