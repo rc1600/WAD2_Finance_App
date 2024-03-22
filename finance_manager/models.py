@@ -40,6 +40,7 @@ class FinancialAccount(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.financial_account_name)
+        self.current_balance = 0
         super(FinancialAccount, self).save(*args,**kwargs)
 
     class Meta:

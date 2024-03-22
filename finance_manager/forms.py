@@ -49,12 +49,12 @@ class UserProfileForm(forms.ModelForm):
 class FinancialAccountForm(forms.ModelForm):
 
     financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
-    balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
+    savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
     picture = forms.ImageField(required=True)
     
     class Meta:
         model = FinancialAccount
-        fields = ['username', 'financial_account_name', 'balance','picture']
+        fields = ['username', 'financial_account_name', 'savings_balance','picture']
         exclude = ['username']
 
     def save(self, user, *args, **kwargs):
