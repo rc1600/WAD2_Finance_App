@@ -11,15 +11,12 @@
 
 <section class = "center">
 
-<p>
-    Choose between a savings or current account to add a new account to your profile. 
-</p>
+
 
 <form method="post" class = "login center" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.financial_account_name}}
-    {{form.savings_balance}}
-    {{form.current_balance}}
+    {{form.balance}}
     {{form.picture}}
     <button type="submit" class = "center input_button">Sign Up</button> 
     <!-- maybe need to center the button text-->
