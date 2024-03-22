@@ -18,8 +18,8 @@
             </h2>
             <nav>
                 <ul>
-                    <li class="nav_elements"><a href="{% url 'about' %}"><u>About Us</u></a></li>
-                    <li class="nav_elements"><a href="{% url 'contact_us' %}"><u>Contact Us</u></a></li>
+                    <li class="nav_elements"><a href="{% url 'about' %}">About Us</a></li>
+                    <li class="nav_elements"><a href="{% url 'contact_us' %}">Contact Us</a></li>
                     {% if user.is_authenticated %}
                         <li class="nav_elements">Logged in as <b>{{ user.username }}</b></li>
                     {% endif %}

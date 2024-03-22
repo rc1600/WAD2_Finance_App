@@ -65,7 +65,7 @@ class FinancialAccountForm(forms.ModelForm):
         return super().save(*args, **kwargs)
         
 class BudgetForm(forms.ModelForm):
-    financial_account_id = forms.HiddenInput()
+    #financial_account_id = forms.
     date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), required=True)
     amount = forms.FloatField()
     

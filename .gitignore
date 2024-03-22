@@ -18,7 +18,6 @@ staticfiles/
 
 # Migrations
 migrations/__pycache__/
-*_initial.py
 
 # IDE specific files
 .vscode/

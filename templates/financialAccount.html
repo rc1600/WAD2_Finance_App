@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_js %}
+<script src="{% static 'js/confirmDelete.js' %}"></script>
+{% endblock %}
+
 {% block title_block %}
     {% if financial_account %}
         {{ financial_account.name }}
@@ -11,30 +15,35 @@
 
 {% block body_block %}
 {% if financial_account %}
-<h1>{{ financial_account}}</h1>
+<h1>{{ financial_account.name }}</h1>
 {% endif %}
-    <div class="user_account_div">
-            <section class="user_account_div_child">
-                <h2>Budget</h2>
-                <a href="{% url 'budget' %}"><img src="{% static 'images/Budget.jpg'%}" alt="Budget" class = "user_account_images" ></a>
-            </section>
-            <section class="user_account_div_child">
-                <h2>Income and Expense</h2>
-                <a href="{% url 'incomeOutcome' %}"><img src="{% static 'images/incomeOutcome.jpg'%}" alt="Income/Outcome" class = "user_account_images" ></a>
-            </section>
-            <section class="user_account_div_child">
-                <h2>Analytics</h2>
-                <a href="{% url 'analysis' %}"><img src="{% static 'images/Analysis.jpg'%}" alt="Analysis" class = "user_account_images" ></a>
-            </section>
-        <br><br>
-    </div>
-    <section class = "center">
-        <p>
-            <button><a href="{% url 'delete_financial_account' financial_account.slug%}">Delete Financial Account</a></button>
-        </p>
-        <p>
-            This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
-        </p>
+<div class="user_account_div">
+    <section class="user_account_div_child">
+        <h2>Budget</h2>
+        <a href="{% url 'budget_for_account' financial_account.slug %}"><img src="{% static 'images/Budget.jpg'%}" alt="Budget" class="user_account_images"></a>
     </section>
+    <section class="user_account_div_child">
+        <h2>Income and Expense</h2>
+        <a href="{% url 'incomeOutcome' %}"><img src="{% static 'images/incomeOutcome.jpg'%}" alt="Income/Outcome" class="user_account_images"></a>
+    </section>
+    <section class="user_account_div_child">
+        <h2>Analytics</h2>
+        <a href="{% url 'analysis' %}"><img src="{% static 'images/Analysis.jpg'%}" alt="Analysis" class="user_account_images"></a>
+    </section>
+    <br><br>
+</div>
+<section class="center">
+    <p>
+        
+        <form method="post" action="{% url 'delete_financial_account' financial_account.slug %}" onsubmit="event.preventDefault(); confirmDeletion(event, 'Are you sure you want to delete this financial account? This action cannot be undone.');">
+            {% csrf_token %}
+            <button type="submit">Delete Financial Account</button>
+        </form>
+    </p>
+    <p>
+        This is your financial account home page. Here you can continue to your budgeting services, track your income and outcome or proceed to the analytics page to view a graph of your spendings.
+    </p>
+</section>
 {% endblock %}
+
 
