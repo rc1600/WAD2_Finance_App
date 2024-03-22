@@ -49,14 +49,15 @@ class UserProfileForm(forms.ModelForm):
 class FinancialAccountForm(forms.ModelForm):
 
     financial_account_name = forms.CharField(required=True, label='Account name', widget=forms.TextInput(attrs={'placeholder': 'Enter the account name', 'class':'inputs'}))
-    balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your balance', 'class':'inputs'}))
+    savings_balance = forms.IntegerField(required=True, label='Savings balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your savings balance', 'class':'inputs'}))
+    current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
     picture = forms.ImageField(required=True)
     
     #what is the point of these balances
 
     class Meta:
         model = FinancialAccount
-        fields = ['username', 'financial_account_name', 'balance','picture']
+        fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance','picture']
         exclude = ['username']
 
     def save(self, user, *args, **kwargs):
@@ -64,10 +65,15 @@ class FinancialAccountForm(forms.ModelForm):
         return super().save(*args, **kwargs)
         
 class BudgetForm(forms.ModelForm):
+    #financial_account_id = forms.
+    date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), required=True)
+    amount = forms.FloatField()
+    
     class Meta:
         model = Budget
-        fields = ['date', 'category', 'amount']
-        exclude = ['financial_account']
+        fields = '__all__'
+        #fields = ['date', 'category', 'amount']
+        #exclude = ['financial_account']
         
 class IncomeForm(forms.ModelForm):
     class Meta:
@@ -88,7 +94,6 @@ class NewSpendingForm(forms.ModelForm):
     name = forms.CharField(required=True, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Name: ', 'class':'inputs'}))
     category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholdr': 'Category: ', 'class': 'inputs'}))
     amount = forms.DecimalField(required=True, max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'placeholder': 'Spending amount: ', 'class':'inputs'}))
-    
     
     class Meta:
         model = NewSpending
