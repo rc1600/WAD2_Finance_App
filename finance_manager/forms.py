@@ -83,7 +83,7 @@ class IncomeForm(forms.ModelForm):
 class ExpenseForm(forms.ModelForm): 
     class Meta:
         model = Expense
-        fields = ['date', 'category', 'product_name', 'price']
+        fields = ['category', 'product_name', 'price']
         exclude = ['financial_account']    
 
 class ContactForm(forms.Form):
@@ -91,7 +91,7 @@ class ContactForm(forms.Form):
     
 class NewSpendingForm(forms.ModelForm):
     name = forms.CharField(required=True, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Name: ', 'class':'inputs'}))
-    category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholdr': 'Category: ', 'class': 'inputs'}))
+    category = forms.ChoiceField(required=True, choices=CATEGORIES, widget=forms.Select(attrs={'placeholder': 'Category: ', 'class': 'inputs'}))
     amount = forms.DecimalField(required=True, max_digits=10, decimal_places=2, widget=forms.NumberInput(attrs={'placeholder': 'Spending amount: ', 'class':'inputs'}))
     
     class Meta:
@@ -100,5 +100,13 @@ class NewSpendingForm(forms.ModelForm):
 
     def save(self, account, *args, **kwargs):
         self.instance.financial_account = account
+        if self.instance.amount < 0:
+            new_expense = Expense.objects.create(
+            financial_account=self.instance.financial_account,
+            category = self.instance.category,
+            price = self.instance.amount,
+            product_name = self.instance.name,
+            )
+            new_expense.save()
         return super().save(*args, **kwargs)
     

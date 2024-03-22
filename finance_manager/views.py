@@ -47,8 +47,9 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def analysis_view(request):
-    expenses = Expense.objects.all()
+def analysis_view(request, account_slug):
+    account = getAccount(request, account_slug)
+    expenses = Expense.objects.filter(financial_account = account)
     labels = [expense.category for expense in expenses]
     values = [expense.price for expense in expenses]
 

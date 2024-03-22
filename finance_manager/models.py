@@ -55,7 +55,7 @@ class Budget(models.Model):
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
     date = models.DateField()
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
-    amount = models.FloatField(validators=[MinValueValidator(0)])
+    amount = models.FloatField()
 
     def save(self, *args, **kwargs):
         super(Budget, self).save(*args,**kwargs)
@@ -66,7 +66,7 @@ class Income(models.Model):
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
     date = models.DateField()
     source = models.CharField(max_length=NAME_MAX_LENGTH)
-    amount = models.FloatField(validators=[MinValueValidator(0)])
+    amount = models.FloatField()
 
     class Meta:
         unique_together = ('date', 'financial_account', 'source')
@@ -75,10 +75,13 @@ class Expense(models.Model):
     NAME_MAX_LENGTH = 128
     
     financial_account = models.ForeignKey(FinancialAccount, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateField(null=True)
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
     product_name = models.CharField(max_length=NAME_MAX_LENGTH)
-    price = models.FloatField(validators=[MinValueValidator(0)])
+    price = models.FloatField()
+
+    def save(self, *args, **kwargs):
+        super(Expense, self).save(*args,**kwargs)
         
 class NewSpending(models.Model):
     NAME_MAX_LENGTH = 128
@@ -88,8 +91,7 @@ class NewSpending(models.Model):
     category = models.CharField(max_length=NAME_MAX_LENGTH, choices=CATEGORIES)
     amount = models.IntegerField()
     
-    class Meta:
-        unique_together = ('financial_account', 'category')
+    
     def save(self, *args, **kwargs):
         super(NewSpending, self).save(*args,**kwargs)
     
