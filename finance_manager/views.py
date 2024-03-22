@@ -117,11 +117,12 @@ def newAccount(request):
         form = FinancialAccountForm()
     return render(request, 'newAccount.html', {"form":form})
 
-def budget(request):
+def budget(request, account_slug):
     if request.method == 'POST':
         form = BudgetForm(request.POST)
         if form.is_valid():
-            form.save()
+            account = getAccount(request, account_slug)
+            form.save(account)
             return redirect('budget')
     else:
         form = BudgetForm()

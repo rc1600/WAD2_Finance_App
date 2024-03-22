@@ -62,7 +62,6 @@ class FinancialAccountForm(forms.ModelForm):
         return super().save(*args, **kwargs)
         
 class BudgetForm(forms.ModelForm):
-    #financial_account_id = forms.
     date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}), required=True)
     amount = forms.FloatField()
     
@@ -70,6 +69,10 @@ class BudgetForm(forms.ModelForm):
         model = Budget
         fields = ['date', 'category', 'amount']
         exclude = ['financial_account']
+
+    def save(self, account, *args, **kwargs):
+        self.instance.financial_account = account
+        return super().save(*args, **kwargs)
         
 class IncomeForm(forms.ModelForm):
     class Meta:

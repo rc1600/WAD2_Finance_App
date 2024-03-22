@@ -60,6 +60,9 @@ class Budget(models.Model):
     class Meta:
         unique_together = ('date', 'financial_account', 'category')
 
+    def save(self, *args, **kwargs):
+        super(Budget, self).save(*args,**kwargs)
+
 class Income(models.Model):
     NAME_MAX_LENGTH = 128
     

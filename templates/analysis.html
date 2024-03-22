@@ -11,8 +11,6 @@
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <button><a href="{% url 'budget' %}">Budget</a></button>
-                        <button><a href="{% url 'incomeOutcome' %}">Income and Expenses</a></button>
                         <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
                 </ul>
