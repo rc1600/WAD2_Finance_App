@@ -1,32 +1,27 @@
 {% extends "base.html" %}
 {% load static %} 
-{% block title_block %}Analysis
-
-<ul> 
-    {% if account_slug %}
-        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-    {% else %}
-        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-    {% endif %}
-</ul>
+{% block title_block %}
+    Analysis - Finance Manager
 {% endblock %}
 
 {% block body_block %}
-<ul> 
-    {% if account_slug %}
-        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-    {% else %}
-        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-    {% endif %}
-</ul>
-<div>
-    <h1>Expense Analysis</h1>
-    <div id="plot"></div>
+    <div class="center">
+        <h4>Expense Analysis</h4>
+        <header class="header-center">
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                        <button><a href="{% url 'budget' %}">Budget</a></button>
+                        <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script>
-        var plot_div = "{{ plot_div|safe }}";
-        
-    </script>
-</div>
+        <div id="plot"></div>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+            var plot_div = "{{ plot_div|safe }}";
+        </script>
+    </div>
 {% endblock %}

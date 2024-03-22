@@ -174,3 +174,8 @@ def deleteBudget(request, id):
     to_delete = Budget.objects.get(id=id)
     to_delete.delete()
     return redirect('budget')
+
+def deleteFinancialAccount(request, account_slug, financial_account_id):
+    to_delete = FinancialAccount.objects.get(financial_account_id=financial_account_id)
+    to_delete.delete()
+    return redirect('userAccountPage')
