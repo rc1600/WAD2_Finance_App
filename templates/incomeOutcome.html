@@ -1,41 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/income.css' %}">
+{% endblock %}
+
 {% block title_block %}
 Income / Spending Page
 {% endblock %}
 
 {% block body_block %}
-    <div class='center'>
-        <h4>Income and Expenses Manager</h4>
-        <header class="header-center">
-            <nav>
-                <ul>
-                    {% if user.is_authenticated %}
-                        <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
-    </div>
-    <hr></hr>
+<div class='center'>
+    <h4>Income and Expenses Manager</h4>
+    <header class="header-center">
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+</div>
+<hr>
 
 <form method="post" action="{% url 'newSpending' financial_account.slug %}">
     {% csrf_token %}
     <button type="submit" class = "center input_button">Manually add spending</button>
 </form>
 
-<hr></hr>
+<hr>
 
+<!-- Bank Statements Table -->
 <div class="center">
     <h4>Bank Statements</h4>
-    <ul>
-        {% for statement in bank_statements %}
-            <li>{{ statement.name }} - {{ statement.category }} - {{ statement.amount }}</li>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Amount (GBP)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for statement in bank_statements %}
+            <tr>
+                <td>{{ statement.name }}</td>
+                <td>{{ statement.category }}</td>
+                <td>{{ statement.amount }}</td>
+                <td><button class="delete-btn">Delete</button></td>
+            </tr>
             {% empty %}
-                <li>No bank statements found</li>
+            <tr>
+                <td colspan="4">No bank statements found</td>
+            </tr>
             {% endfor %}
-    </ul>
+        </tbody>
+    </table>
     <p>Total Amount: £{{ total_amount }}</p>
 </div>
 
