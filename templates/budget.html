@@ -61,6 +61,9 @@
                 <form method="post" id="budget-form">
                     {% csrf_token %}
                     <div class="form-field">
+                        <label for="id_financial_account_id">Financial Account ID:</label>
+                        {{ form.financial_account_id }}
+                        
                         <label for="id_date">Date:</label>
                         {{ form.date }}
                     
