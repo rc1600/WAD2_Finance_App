@@ -95,11 +95,10 @@ def userAccountPage(request):
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
 def financialAccount(request, account_slug):
-    userProfile =  UserProfile.objects.get(user = request.user)
-    account = FinancialAccount.objects.get(username = userProfile, slug = account_slug)
+    account = getAccount(request, account_slug)
     context_dict = {}
     try:
-        context_dict['financial_account'] = account.financial_account_name
+        context_dict['financial_account'] = account
     except:
         context_dict['financial_account'] = None
     return render(request, 'financialAccount.html', context_dict)
@@ -159,7 +158,13 @@ def deleteBudget(request, id):
     to_delete.delete()
     return redirect('budget')
 
-def deleteFinancialAccount(request, account_slug, financial_account_id):
-    to_delete = FinancialAccount.objects.get(financial_account_id=financial_account_id)
+def deleteFinancialAccount(request, account_slug):
+    account = getAccount(request, account_slug)
+    to_delete = account
     to_delete.delete()
-    return redirect('userAccountPage')
+    return redirect(reverse('userAccountPage'))
+
+def getAccount(request, account_slug):
+    userProfile =  UserProfile.objects.get(user = request.user)
+    account = FinancialAccount.objects.get(username = userProfile, slug = account_slug)
+    return account
