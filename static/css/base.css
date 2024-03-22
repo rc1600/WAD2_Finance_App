@@ -3,15 +3,18 @@ body {
     background-color: #454646;
 }
 
-section {
-    
-}
+
 
 .user_account_div {
 
     width: 100%;
     text-align: center;
 
+}
+
+.div2{
+    background-color: #FF6347;
+    border-radius: 10px; 
 }
 
 .user_account_div_child {
@@ -63,6 +66,8 @@ button {
     border-style: solid;
     
 }
+
+
 
 .contact_message {
     display: block;
@@ -160,6 +165,22 @@ h4 {
 }
 
 p { 
+    color: #FFFF;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+strong {
+    color: #FFFF;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+li{
     color: #FFFF;
     font-family: 'Inter';
     font-style: normal;
