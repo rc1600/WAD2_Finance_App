@@ -97,9 +97,11 @@ def userAccountPage(request):
     return render(request, 'userAccountPage.html', {'bank_accounts': bank_accounts})
 
 def financialAccount(request, account_slug):
+    userProfile =  UserProfile.objects.get(user = request.user)
+    account = FinancialAccount.objects.get(username = userProfile, slug = account_slug)
     context_dict = {}
     try:
-        context_dict['financial_account'] = account_slug
+        context_dict['financial_account'] = account.financial_account_name
     except:
         context_dict['financial_account'] = None
     return render(request, 'financialAccount.html', context_dict)
@@ -113,7 +115,6 @@ def newAccount(request):
         if form.is_valid():
             userProfile =  UserProfile.objects.get(user = request.user)
             form.save(userProfile)
-            print("THE UCK??")
             return redirect(reverse('userAccountPage'))
         else:
             print(form.errors)
