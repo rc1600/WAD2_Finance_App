@@ -73,6 +73,7 @@ class ViewsTestCase(TestCase):
     def test_deleteFinancialAccount_view(self):
         response = self.client.get(reverse('delete_financial_account', args=[self.account.slug, self.account.pk]))
         self.assertEqual(response.status_code, 302)
+        self.assertFalse(FinancialAccount.objects.filter(pk=self.account.pk).exists())
 
     def test_home_template(self):
         response = self.client.get(reverse('home'))
