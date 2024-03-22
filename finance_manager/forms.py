@@ -53,8 +53,6 @@ class FinancialAccountForm(forms.ModelForm):
     current_balance = forms.IntegerField(required=True, label='Current balance', widget=forms.TextInput(attrs={'placeholder': 'Enter your current balance', 'class':'inputs'}))
     picture = forms.ImageField(required=True)
     
-    #what is the point of these balances
-
     class Meta:
         model = FinancialAccount
         fields = ['username', 'financial_account_name', 'savings_balance', 'current_balance','picture']

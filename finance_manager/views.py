@@ -3,10 +3,10 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages  # Import messages
+from django.contrib import messages
 from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login  # Alias the login function
+from django.contrib.auth import login
 from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense, NewSpending
 from django.shortcuts import render
 from django.db.models import Sum
@@ -21,7 +21,6 @@ def signup_view(request):
             print("We made it here")
             UserProfile.objects.create(user=user)
             login(request, user)
-              # Create UserProfile for the new user
             return redirect('userAccountPage')
     else:
         form = CustomUserCreationForm()
@@ -125,7 +124,7 @@ def newAccount(request):
             print(form.errors)
             messages.error(request, "There was a problem creating a new account. Please try again.")
     else:
-        form = FinancialAccountForm()  # If not a post request, create an empty form
+        form = FinancialAccountForm()
     return render(request, 'newAccount.html', {"form":form})
 
 def budget(request):
@@ -159,7 +158,7 @@ def contact_form_submit(request):
     else:
         form = ContactForm()
 
-    return render(request, 'ContactUs.html', {'form': form})  # this needs changed to URL form
+    return render(request, 'ContactUs.html', {'form': form})
 
 def deleteBudget(request, id):
     to_delete = Budget.objects.get(id=id)
