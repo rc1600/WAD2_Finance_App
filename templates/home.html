@@ -4,19 +4,14 @@
     Home - Finance Manager
 {% endblock %}
 
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block body_block %}
     <header>
         <nav>
             <ul>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'analysis' %}">Analytics</a></li>
-                    {% if account_slug %}
-                        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-                    {% else %}
-                        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-                    {% endif %}
-                    {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'admin:index' %}">Admin</a></li>
                     {% endif %}
