@@ -30,7 +30,7 @@
     </div>
     <section class = "center">
         <p>
-            <button><a href="delete-financial-account/{{ financial_account.financial_account_id }}">Delete Financial Account</a></button>
+            <button><a href="{% url 'delete-financial-account' financial_account.financial_account_id financial_account.slug%}">Delete Financial Account</a></button>
         </p>
         <p>
             This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
