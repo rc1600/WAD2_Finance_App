@@ -206,10 +206,8 @@ a, a:hover, a:visited, a:active {
 
 /* Error message styles */
 .errorlist {
-    color: #D8000C;
-    background-color: #FFD2D2;
+    background-color: #D8000C;
     border: 1px solid #D8000C;
-    padding: .5em;
     margin: .5em 0;
     border-radius: 4px;
     font-size: .875em;
@@ -234,6 +232,10 @@ input:focus {
 
 input:focus.input-error {
     border: 1px solid #D8000C;
+}
+
+.error {
+    color: #FFFF;
 }
 
 
