@@ -9,7 +9,9 @@
 
 
 {% block body_block %}
-    <h2>Welcome, <b>{{ user.username }}</b></h2>
+    <div>
+    <h2 class="center" id = "welcome">Welcome</h2>
+    </div>
         <div class="user_account_div" >
             {% if bank_accounts %}
                 {% for bank_account in bank_accounts %}
@@ -24,14 +26,11 @@
                 {% endfor %}
             {% endif %}
             {% if bank_accounts|length < 3 %}
-                <div class="account-section" >
-                    <h2>Add New Account</h2>
-                    <div class="account-item">
+                    <div class="user_account_div_child">
                         <a href="{% url 'newAccount' %}">
-                            <img src="{% static 'images/addNewAccount.jpg' %}" alt="add new account" class="user_account_images" >
+                            <button class = "input_button">Add New Account</button>
                         </a>
                     </div>
-                </div>
             {% endif %}
         </div>
 {% endblock %}

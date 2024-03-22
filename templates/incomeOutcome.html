@@ -22,7 +22,7 @@ Income / Spending Page
     </div>
     <hr></hr>
 
-<form method="post" action="{% url 'newSpending' %}">
+<form method="post" action="{% url 'newSpending' financial_account.slug %}">
     {% csrf_token %}
     <button type="submit" class = "center input_button">Manually add spending</button>
 </form>
@@ -40,19 +40,5 @@ Income / Spending Page
     </ul>
     <p>Total Amount: £{{ total_amount }}</p>
 </div>
-
-
-
-<form method="post" action="{% url 'newSpending' %}">
-    {% csrf_token %}
-    <button type="submit" class = "center input_button">Manually add spending</button>
-</form>
-
-
-
-<form method="post" action="{% url 'newSpending' %}">
-    {% csrf_token %}
-    <button type="submit" class = "center input_button">Manually add spending</button>
-</form>
 
 {% endblock %}

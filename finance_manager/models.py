@@ -90,10 +90,9 @@ class NewSpending(models.Model):
     
     class Meta:
         unique_together = ('financial_account', 'category')
-        
-    #def save(self, user, *args, **kwargs):
-        #self.instance.financial_account = user
-        #super(NewSpending, self).save(*args,**kwargs)
+    def save(self, *args, **kwargs):
+        super(NewSpending, self).save(*args,**kwargs)
+    
 
 
 class ContactMessage(models.Model):

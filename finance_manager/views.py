@@ -7,7 +7,7 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm, FinancialAccountForm, ContactForm, BudgetForm, NewSpendingForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login  # Alias the login function
-from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense
+from .models import FinancialAccount, UserProfile, ContactMessage, Budget, Expense, NewSpending
 from django.shortcuts import render
 import plotly.graph_objs as go
 from .models import ContactMessage
@@ -69,9 +69,10 @@ def newSpending(request, account_slug):
     if request.method == 'POST':
         form = NewSpendingForm(request.POST, request.FILES)
         if form.is_valid():
-            userProfile =  UserProfile.objects.get(user = request.user)
-            form.save(userProfile)
-            return redirect(reverse('incomeOutcome'))
+            account = getAccount(request, account_slug)
+            form.save(account)
+            print(account_slug)
+            return redirect(reverse('incomeOutcome', kwargs={'account_slug':account_slug}))
         else:
             print(form.errors)
             messages.error(request, "There was a problem adding your spending. Please try again.")
@@ -79,11 +80,6 @@ def newSpending(request, account_slug):
         form = NewSpendingForm()  # If not a post request, create an empty form
     return render(request, 'newSpending.html', {"form" : form})
 
-def incomeOutcome(request):
-    if request.method == 'POST':
-        return redirect('newSpending')
-    else:
-        return render(request, "incomeOutcome.html")
     
 def about(request):
     return render(request, 'aboutUs.html')
@@ -134,8 +130,14 @@ def budget(request):
 
     return render(request, 'budget.html', {'form': form, 'existing_budget': existing_budget})
 
-def incomeOutcome(request):
-    return render(request, 'incomeOutcome.html')
+def incomeOutcome(request, account_slug):
+    if request.method == 'POST':
+        return redirect('newSpending')
+    account = getAccount(request, account_slug)
+    print(account)
+    spending = NewSpending.objects.filter(financial_account=account)
+    print(len(spending))
+    return render(request, 'incomeOutcome.html', {'financial_account':account,'bank_statements':spending})
 
 def contact_form_submit(request):
     if request.method == 'POST':

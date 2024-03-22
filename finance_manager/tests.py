@@ -53,7 +53,8 @@ class FinancialAccountTestCase(TestCase):
         self.financial_account = FinancialAccount.objects.create(
             username=self.user_profile,
             financial_account_name='Test Account',
-            balance=500,
+            savings_balance=500,
+            current_balance=0,
             slug='test-account'
         )
 

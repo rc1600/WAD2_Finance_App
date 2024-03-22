@@ -20,15 +20,13 @@
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                        <button><a href="{% url 'incomeOutcome' %}">Income and Expenses</a></button>
-                        <button><a href="{% url 'analysis' %}">Analysis</a></button>
+                        
                         <button><a href="{% url 'userAccountPage' %}">Back to user account</a></button>
                     {% endif %}
                 </ul>
             </nav>
         </header>
         
-        <hr>
         <div class="images-section">
             <img src="{% static 'images/budget_1.jpg' %}" alt="Budget Checklist" class="home_img">
             <img src="{% static 'images/budget_2.jpg' %}" alt="Budget Manager" class="home_img">

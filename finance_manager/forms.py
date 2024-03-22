@@ -95,9 +95,7 @@ class NewSpendingForm(forms.ModelForm):
         model = NewSpending
         fields = ['name', 'category', 'amount']
 
-    def save(self, user=None, *args, **kwargs):
-        instance = super().save(commit=False)
-        if user:
-            instance.financial_account = user
-        instance.save()
-        return instance
+    def save(self, account, *args, **kwargs):
+        self.instance.financial_account = account
+        return super().save(*args, **kwargs)
+    
