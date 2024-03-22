@@ -1,0 +1,96 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #FFFFFF
+    text-align: left;
+    padding: 8px;
+    color: #FFFFFF;
+
+}
+
+th {
+    background-color: #333;
+}
+.images-section {
+    display: flex;
+    justify-content: space-around; 
+    flex-wrap: wrap; 
+    margin: 20px 0; 
+  }
+  
+  tr:nth-child(even) {
+      background-color: #666; 
+    }
+
+tr:nth-child(odd) {
+    background-color: #555; 
+  }
+
+  
+  /* Styles for the images themselves */
+  .home_img {
+    flex: 0 0 calc(50% - 40px); 
+    margin: 20px; 
+  }
+  
+  /* Container for the budget form to ensure it's centered and styled */
+  #income_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Labels and inputs for form fields */
+  .form-field label, .form-field input, .form-field select {
+    display: block;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for the submit button */
+  .input_button {
+    width: auto;
+    padding: 10px 30px;
+  }
+  
+  /* Centering class for various elements */
+  .center {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .images-section {
+      justify-content: center;
+    }
+    
+    .home_img {
+      flex: 0 0 100%; 
+      margin: 10px 0; 
+    }
+  
+    #income-form, .form-field label, .form-field input, .form-field select {
+      width: 90%;
+    }
+  }
+  

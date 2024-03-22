@@ -19,27 +19,25 @@
 {% endif %}
     <div class="user_account_div">
             <section class="user_account_div_child">
-                <h2>Budget</h2>
-                <a href="{% url 'budget' financial_account.slug %}"><img src="{% static 'images/Budget.jpg'%}" alt="Budget" class = "user_account_images" ></a>
+                
+                <button><a href="{% url 'budget' financial_account.slug %}">Budget</a></button>
             </section>
             <section class="user_account_div_child">
-                <h2>Income and Expense</h2>
-                <a href="{% url 'incomeOutcome' financial_account.slug %}"><img src="{% static 'images/incomeOutcome.jpg'%}" alt="Income/Outcome" class = "user_account_images" ></a>
+                
+                <button><a href="{% url 'incomeOutcome' financial_account.slug %}">Income and Expenses</a></button>
             </section>
             <section class="user_account_div_child">
                 <h2>Analytics</h2>
                 <a href="{% url 'analysis' financial_account.slug %}"><img src="{% static 'images/Analysis.jpg'%}" alt="Analysis" class = "user_account_images" ></a>
             </section>
-        <br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
     </div>
-    <section class = "center">
-        <p>
-            <button><a href="{% url 'delete_financial_account' financial_account.slug%}">Delete Financial Account</a></button>
-        </p>
-        <p>
-            This is your financial account home page. Here you can continue to your budgeting services, track you income and outcome or proceed to the analytics page to view a graph of your spendings.
-        </p>
-    </section>
+
+    <div class="user_account_div">
+        <section class="user_account_div_child">
+            <button style="background-color: red;"><a href="{% url 'delete_financial_account' financial_account.slug%}">Delete Financial Account</a></button>
+        </section>
+    </div>
 {% endblock %}
 
 
