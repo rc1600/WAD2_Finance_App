@@ -137,3 +137,4 @@ MEDIA_ROOT = MEDIA_DIR
 
 LOGIN_REDIRECT_URL = 'home'
 
+ALLOWED_HOSTS = ['community.pythonanywhere.com']
