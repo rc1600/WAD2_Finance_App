@@ -18,8 +18,10 @@ def signup_view(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            print("We made it here")
+            UserProfile.objects.create(user=user)
             login(request, user)
-            UserProfile.objects.create(user=user)  # Create UserProfile for the new user
+              # Create UserProfile for the new user
             return redirect('userAccountPage')
     else:
         form = CustomUserCreationForm()
@@ -64,7 +66,7 @@ def analysis_view(request):
 def contactUs(request):
     return render(request, 'contactUs.html')
 
-def newSpending(request):
+def newSpending(request, account_slug):
     if request.method == 'POST':
         form = NewSpendingForm(request.POST, request.FILES)
         if form.is_valid():
