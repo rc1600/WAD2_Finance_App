@@ -1,24 +1,50 @@
-{% extends 'base.html' %}  
+{% extends 'base.html' %}
 {% load static %}  <!-- Updated from staticfiles to static for newer Django versions -->
+
 {% block title_block %}
     About us 
 {% endblock %}
+
 {% block body_block %}
-<ul> 
-    {% if account_slug %}
-        <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
-    {% else %}
-        <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
-    {% endif %}
-</ul>
-        <section class = 'center'>
-            <p>
-                Finance Manager is at the forefront of saving technology. Our idea came from one of our group members who is horribly addicted to gambling and needed a way of controlling his spending.
-            </p>
-            <br>
-            <p>
-                We aim to provide our service to anyone who is in need of a concise method to track their income and outcome, and to set budgets.
-            </p>
-        </section>
-    </main>
+    <ul> 
+        {% if account_slug %}
+            <li><a href="{% url 'financial_account' account_slug=account_slug %}">Back to Financial Account</a></li>
+        {% else %}
+            <li><a href="{% url 'home' %}">Back to Home</a></li>  {# Example fallback link #}
+        {% endif %}
+    </ul>
+    
+    <section class='center'>
+        <h2>Welcome to Finance Manager!</h2>
+
+        <p>
+            At Finance Manager, we understand the importance of managing your finances effectively. Whether you're a student on a tight budget, a working professional looking to save for the future, or someone simply aiming for financial stability, we're here to help you achieve your goals.
+        </p>
+
+        <p>
+            Our journey began with a simple idea: to provide a concise method for individuals to track their income, monitor their spending, and set realistic budgets. We recognized the need for a user-friendly platform that empowers people to take control of their financial well-being, and thus, Financial Manager was born.
+        </p>
+
+        <p>
+            As a team of passionate students, we've dedicated countless hours to developing a robust platform that simplifies the complexities of personal finance. Our mission is to make financial management accessible to everyone, regardless of their background or experience level.
+        </p>
+
+        <p>
+            Here's what sets us apart:
+        </p>
+
+        <ul>
+            <li><strong>User-Centric Approach:</strong> We've designed our platform with you in mind. From the intuitive interface to the comprehensive features, every aspect of Financial Manager is tailored to meet your needs and exceed your expectations.</li>
+            <li><strong>Transparency and Trust:</strong> We prioritize transparency and trust in everything we do. Your privacy and security are our top priorities, and we take every measure to ensure that your financial information remains safe and secure.</li>
+            <li><strong>Continuous Improvement:</strong> We're committed to constant innovation and improvement. We actively seek feedback from our users, through our contact us page and incorporate their suggestions to enhance the user experience and add new features that address their evolving needs.</li>
+        </ul>
+
+        <p>
+            Join our platform and discover the benefits of Financial Manager. Take the first step towards financial freedom today!
+        </p>
+
+        <p>
+            Thank you for choosing Financial Manager as your trusted partner in financial management.
+        </p>
+    </section>
 {% endblock %}
