@@ -31,9 +31,22 @@
             <section>
                 <h2>Existing Budget:</h2>
                 <ul>
+                    <table border="1">
+                        <th>Year</th>
+                        <td>Month</td>
+                        <td>Category</td>
+                        <td>Amount (GBP)</td>
+                        <td>Delete Record</td>
                     {% for budget in existing_budget %}
-                        <li>{{ budget.date }} - Category: {{ budget.category }}, Amount: {{ budget.amount }}</li>
+                        <tr>
+                        <td>{{budget.date.year}}</td>
+                        <td>{{budget.date.month}}</td>
+                        <td>{{budget.category}}</td>
+                        <td>{{budget.amount}}£</td>
+                        <td><a href="delete-budget/{{ budget.id}}">delete</a></td>
+                        </tr>
                     {% endfor %}
+                    </table>
                 </ul>
             </section>
         {% endif %}
