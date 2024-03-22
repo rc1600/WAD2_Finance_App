@@ -59,7 +59,7 @@ def login_view(request):
 
 def analysis_view(request):
     expenses = Expense.objects.all()
-    labels = [expense.product_name for expense in expenses]
+    labels = [expense.category for expense in expenses]
     values = [expense.price for expense in expenses]
 
     trace = go.Pie(labels=labels, values=values)
