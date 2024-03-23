@@ -49,21 +49,37 @@ def login_view(request):
 
 def analysis_view(request, account_slug):
     account = getAccount(request, account_slug)
-    expenses = Expense.objects.filter(financial_account = account)
-    if len(expenses) == 0:
+
+    # Retrieve both Expenses and NewSpendings for the account
+    expenses = Expense.objects.filter(financial_account=account)
+    new_spendings = NewSpending.objects.filter(financial_account=account)
+
+    # Combine the two types of spending into a single list of tuples (category, amount)
+    combined_spendings = [(expense.category, expense.price) for expense in expenses]
+    combined_spendings.extend([(spending.category, spending.amount) for spending in new_spendings])
+
+    if not combined_spendings:
         return render(request, 'analysis.html', {'plot_div': "THERE ARE NO EXPENSES CURRENTLY"})
-    labels = [expense.category for expense in expenses]
-    values = [expense.price for expense in expenses]
+
+    # Use a dictionary to sum amounts by category
+    category_totals = {}
+    for category, amount in combined_spendings:
+        if category in category_totals:
+            category_totals[category] += amount
+        else:
+            category_totals[category] = amount
+
+    
+    labels = list(category_totals.keys())
+    values = list(category_totals.values())
 
     trace = go.Pie(labels=labels, values=values)
-
     layout = go.Layout(title='Expense Analysis')
-
     fig = go.Figure(data=[trace], layout=layout)
-
     plot_div = fig.to_html(full_html=False)
 
     return render(request, 'analysis.html', {'plot_div': plot_div})
+
 
 def contactUs(request):
     return render(request, 'contactUs.html')
